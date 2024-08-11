@@ -66,7 +66,6 @@ Upon opening the project, Unity will automatically resolve any package dependenc
 ### Branching Strategy
 We follow the `Trunk` branching model:
 - **main**: Contains the main consolodated code base.
-- **dev**: The main development branch. All feature branches should be merged here.
 - **release/release-name**: Release branches for new releases.
 - **feature/feature-name**: Feature branches for new features and enhancements.
 - **bugfix/bugfix-name**: Bugfix branches for resolving issues.
