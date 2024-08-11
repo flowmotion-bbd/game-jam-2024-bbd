@@ -64,15 +64,16 @@ Upon opening the project, Unity will automatically resolve any package dependenc
 ## Development Guidelines
 
 ### Branching Strategy
-We follow the Git Flow branching model:
-- **main**: Contains stable, production-ready code.
+We follow the `Trunk` branching model:
+- **main**: Contains the main consolodated code base.
 - **dev**: The main development branch. All feature branches should be merged here.
+- **release/release-name**: Release branches for new releases.
 - **feature/feature-name**: Feature branches for new features and enhancements.
 - **bugfix/bugfix-name**: Bugfix branches for resolving issues.
 
 ### Creating a New Branch
 ```bash
-git checkout dev
+git checkout main
 git pull
 git checkout -b feature/your-feature-name
 ```
