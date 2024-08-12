@@ -38,7 +38,7 @@ cd game-jam-2024-bbd
 ### Installing Dependencies
 Upon opening the project, Unity will automatically resolve any package dependencies via the Unity Package Manager. Ensure all packages are installed without errors.
 
-## Project Structure
+## Project Structure (subject to change)
 
 ```
 /Assets
@@ -58,7 +58,6 @@ Upon opening the project, Unity will automatically resolve any package dependenc
     /Prefabs
         /...                # Sub-directories for different prefab groups
         /UIElements         # Prefabs for UI components
-/Tests                      # Unit and integration tests (if we use this)
 ```
 
 ## Development Guidelines
@@ -78,7 +77,7 @@ git checkout -b feature/your-feature-name
 ```
 
 ### Merging Branches
-Once your work is complete and tested, open a pull request to merge your feature branch into `dev`. Ensure your branch is up to date with `dev` before requesting a merge.
+Once your work is complete and tested, open a pull request to merge your feature branch into `main`. Ensure your branch is up to date with `main` before requesting a merge.
 
 ## Coding Standards
 
@@ -105,9 +104,6 @@ Once your work is complete and tested, open a pull request to merge your feature
 - **Audio:** Compress audio files and set import settings to optimize for platform performance.
 
 ## Testing
-
-### Unit Testing
-All core game logic should be covered by unit tests where applicable. Tests are located in the `/Tests` directory.
 
 ### Playtesting
 Regular playtesting is essential. All new features should be playtested locally before merging into the `dev` branch.
