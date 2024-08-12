@@ -44,7 +44,9 @@ Upon opening the project, Unity will automatically resolve any package dependenc
 /Assets
     /Art
         /Sprites            # 2D sprite assets
+            /...            # Sub-directories for different sprite groups
         /Animations         # Animation assets
+            /...            # Sub-directories for different animation groups
     /Audio
         /Music              # Sick beats for the game's `vaabs`
         /SFX                # Well... SFX xD
@@ -53,8 +55,9 @@ Upon opening the project, Unity will automatically resolve any package dependenc
         /UI                 # UI scripts and components
         /Systems            # Game systems like input, saving, etc.
     /Scenes
-        /MainMenu           # Main menu scene
-        /Level1             # Level (e.g.)
+        MainMenu            # Main menu scene
+        /Minigames          # The different minigames
+        /Levels             # The different levels
     /Prefabs
         /...                # Sub-directories for different prefab groups
         /UIElements         # Prefabs for UI components
