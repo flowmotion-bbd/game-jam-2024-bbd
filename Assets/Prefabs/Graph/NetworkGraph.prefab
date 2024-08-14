@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 797336171117210201}
   - component: {fileID: 3884844484023917126}
   - component: {fileID: 4312101409865522275}
-  - component: {fileID: 4216692103344696732}
+  - component: {fileID: 7458888919366931799}
   m_Layer: 0
   m_Name: NetworkGraph
   m_TagString: Untagged
@@ -124,7 +124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesParent: {fileID: 3368667816020361985}
   edgeParent: {fileID: 1364865026976766153}
---- !u!114 &4216692103344696732
+  startNodeTypes: 07000000
+  endNodeType: 3
+--- !u!114 &7458888919366931799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
