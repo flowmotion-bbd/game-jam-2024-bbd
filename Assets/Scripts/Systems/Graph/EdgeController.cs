@@ -7,16 +7,16 @@ public class EdgeController : MonoBehaviour
 {
 
     private EdgeState edgeState;
-    private GraphController graphController;
+    private LevelManager levelManager;
 
     void Awake()
     {
-        graphController = FindAnyObjectByType<GraphController>();
+        levelManager = FindAnyObjectByType<LevelManager>();
         edgeState = GetComponent<EdgeState>();
     }
 
     void OnMouseDown()
     {
-        graphController.RemoveEdgeFromDataPath(edgeState);
+        levelManager.RemoveEdgeFromDataPath(edgeState);
     }
 }

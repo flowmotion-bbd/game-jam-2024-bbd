@@ -60,6 +60,24 @@ public class GraphController : MonoBehaviour
 
     void UpdateNodes()
     {
+        IEnumerable<EdgeState> visibleEdges = graphState.Graph.Edges.Where(edge => edge.Edge.Visible);
+        foreach (EdgeState visibleEdge in visibleEdges)
+        {
+            visibleEdge.Edge.NodeStateA.Node.Visible = true;
+            visibleEdge.Edge.NodeStateB.Node.Visible = true;
+        }
+
+        foreach (DataPath dataPath in graphState.DataPaths)
+        {
+            foreach (NodeState nodeState in dataPath.Path)
+            {
+                nodeState.Node.Compromised = true;
+            }
+        }
+    }
+
+    void UpdateEdges()
+    {
         foreach (DataPath dataPath in graphState.DataPaths)
         {
             foreach (NodeState nodeState in dataPath.Path)
@@ -72,17 +90,11 @@ public class GraphController : MonoBehaviour
                 }
             }
         }
-
-        IEnumerable<EdgeState> visibleEdges = graphState.Graph.Edges.Where(edge => edge.Edge.Visible);
-        foreach (EdgeState visibleEdge in visibleEdges)
-        {
-            visibleEdge.Edge.NodeStateA.Node.Visible = true;
-            visibleEdge.Edge.NodeStateB.Node.Visible = true;
-        }
     }
 
-    void UpdateEdges()
+    public void ResetState()
     {
-
+        currentDataPathIndex = 0;
+        graphState.ResetState();
     }
 }

@@ -12,12 +12,7 @@ public class GraphRenderer : MonoBehaviour
         graphState = GetComponent<GraphState>();
     }
 
-    void Update()
-    {
-        UpdateGraph();
-    }
-
-    private void UpdateGraph()
+    public void UpdateGraph()
     {
         foreach (EdgeState edgeState in graphState.Graph.Edges)
         {
@@ -30,10 +25,12 @@ public class GraphRenderer : MonoBehaviour
         {
             NodeRenderer nodeRenderer = nodeState.GetComponent<NodeRenderer>();
             nodeRenderer.ToggleVisibility(nodeState.Node.Visible);
+            nodeRenderer.ToggleSelected(false, Color.clear);
         }
 
         foreach (DataPath dataPath in graphState.DataPaths)
         {
+            //dataPath.Path.First().GetComponent<NodeRenderer>().ToggleSelected(true, dataPath.Colour);
             for (int i = 0; i < dataPath.Path.Count - 1; i++)
             {
                 EdgeState edgeState = graphState.RetrieveEdge(dataPath.Path[i], dataPath.Path[i + 1]);
@@ -51,6 +48,9 @@ public class GraphRenderer : MonoBehaviour
         }
 
         DataPath currentDataPath = graphState.DataPaths[GetComponent<GraphController>().CurrentDataPathIndex];
+
+        currentDataPath.Path.First().GetComponent<NodeRenderer>().ToggleSelected(true, currentDataPath.Colour);
+        
         for (int i = 0; i < currentDataPath.Path.Count - 1; i++)
         {
             EdgeState edgeState = graphState.RetrieveEdge(currentDataPath.Path[i], currentDataPath.Path[i + 1]);

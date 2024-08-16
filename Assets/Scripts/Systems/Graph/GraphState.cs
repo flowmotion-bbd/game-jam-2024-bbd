@@ -9,6 +9,8 @@ public class GraphState : MonoBehaviour
     private Graph graph = new Graph();
     [SerializeField] private List<DataPath> dataPaths = new List<DataPath>();
 
+    List<DataPath> origDataPaths = new List<DataPath>();
+
     public Graph Graph
     {
         get { return graph; }
@@ -40,6 +42,13 @@ public class GraphState : MonoBehaviour
         {
             graph.AddEdge(edgeState);
         }
+
+        foreach(DataPath dataPath in dataPaths)
+        {
+            origDataPaths.Add(new DataPath(dataPath));
+        }
+
+        GetComponent<GraphRenderer>().UpdateGraph();
     }
 
     public void AddNodeToDataPath(int dataPathIndex, NodeState nodeState)
@@ -68,5 +77,24 @@ public class GraphState : MonoBehaviour
     public IEnumerable<EdgeState> RetrieveEdgeWithNode(NodeState node)
     {
         return graph.Edges.Where(edgeState => edgeState.Edge.ContainsNode(node));
+    }
+
+    public void ResetState()
+    {
+        dataPaths = new List<DataPath>();
+        foreach (DataPath dataPath in origDataPaths)
+        {
+            dataPaths.Add(new DataPath(dataPath));
+        }
+
+        foreach (EdgeState edgeState in graph.Edges)
+        {
+            edgeState.ResetState();
+        }
+
+        foreach (NodeState nodeState in graph.Nodes)
+        {
+            nodeState.ResetState();
+        }
     }
 }

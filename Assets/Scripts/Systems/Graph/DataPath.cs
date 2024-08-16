@@ -34,4 +34,14 @@ public class DataPath
             path.RemoveRange(nodeIndex, path.Count - nodeIndex);
         }
     }
+
+    public DataPath(DataPath dataPath)
+    {
+        this.colour = dataPath.colour;
+        
+        foreach (NodeState nodeState in dataPath.path)
+        {
+            this.path.Add(nodeState);
+        }
+    }
 }

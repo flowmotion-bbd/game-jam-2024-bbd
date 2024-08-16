@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1809788935464160727}
   - component: {fileID: 5523322152923205097}
   m_Layer: 0
-  m_Name: Level Camera
+  m_Name: LevelCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3148323808793649126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0ea7d2549b461e4c9c5a20ef0d5cc0c, type: 3}
   m_Name: 
