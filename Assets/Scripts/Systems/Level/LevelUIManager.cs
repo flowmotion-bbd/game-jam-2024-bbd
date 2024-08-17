@@ -16,6 +16,9 @@ public class LevelUIManager : MonoBehaviour
     void Start()
     {
         levelManager = FindAnyObjectByType<LevelManager>();
+
+        timerText.text = FormatTime(0f);
+
         HideEndLevelScreen();    
     }
     public void ShowEndLevelScreen(List<float> topTimes, float usersTime)
@@ -42,6 +45,7 @@ public class LevelUIManager : MonoBehaviour
 
     public void RetryLevel()
     {
+        timerText.text = FormatTime(0f);
         levelManager.RestartLevel();
     }
 
