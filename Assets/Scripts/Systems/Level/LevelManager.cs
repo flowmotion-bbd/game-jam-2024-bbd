@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,6 +19,11 @@ public class LevelManager : MonoBehaviour
     private float countDownTime = 3f;
     private bool isCountingDown = false;
 
+    private bool isInMinigame = false;
+    private string minigameSceneName = string.Empty;
+
+    [SerializeField] private List<GameObject> levelObjects = new List<GameObject>();
+
     void Start()
     {
         graphController = FindAnyObjectByType<GraphController>();
@@ -24,45 +32,68 @@ public class LevelManager : MonoBehaviour
 
         levelUIManager = FindAnyObjectByType<LevelUIManager>();
 
+        elapsedTime = 0f;
+
+        ShowLevelObjects();
         StartCountDown();
+    }
+
+    void HideLevelObjects()
+    {
+        foreach (GameObject obj in levelObjects)
+        {
+            obj.SetActive(false);
+        }
+    }
+    void ShowLevelObjects()
+    {
+        foreach (GameObject obj in levelObjects)
+        {
+            obj.SetActive(true);
+        }
     }
 
     void Update()
     {
-        if (LevelFinished())
+        if (!isInMinigame)
         {
-            StopTimer();
-            FindFirstObjectByType<LevelUIManager>().ShowEndLevelScreen(new List<float>() { 20, 20, 20 }, elapsedTime);
-        }
-
-        for (int i = 0; i <= 9; i++)
-        {
-            KeyCode mainKey = KeyCode.Alpha0 + i;   // Main number keys (0-9)
-            KeyCode numpadKey = KeyCode.Keypad0 + i; // Numeric keypad keys (0-9)
-
-            if (Input.GetKeyDown(mainKey) || Input.GetKeyDown(numpadKey))
+            if (LevelFinished())
             {
-                graphState.GetComponent<GraphController>().CurrentDataPathIndex = i - 1;
+                StopTimer();
+                FindFirstObjectByType<LevelUIManager>().ShowEndLevelScreen(new List<float>() { 20, 20, 20 }, elapsedTime);
             }
-        }
 
-        if (isTiming)
-        {
-            elapsedTime += Time.deltaTime;
-            levelUIManager.UpdateTimerDisplay(elapsedTime);
-        } else if (countDownTime < 0f)
-        {
-            countDownTime = 3f;
-            isCountingDown = false;
-            levelUIManager.HideCountdown();
-            StartTimer();
-        } else if (isCountingDown)
-        {
-            countDownTime -= Time.deltaTime;
-            levelUIManager.UpdateCountdownDisplay(countDownTime);
-        }
+            for (int i = 0; i <= 9; i++)
+            {
+                KeyCode mainKey = KeyCode.Alpha0 + i;   // Main number keys (0-9)
+                KeyCode numpadKey = KeyCode.Keypad0 + i; // Numeric keypad keys (0-9)
 
-        graphRenderer.UpdateGraph();
+                if (Input.GetKeyDown(mainKey) || Input.GetKeyDown(numpadKey))
+                {
+                    graphState.GetComponent<GraphController>().CurrentDataPathIndex = i - 1;
+                }
+            }
+
+            if (isTiming)
+            {
+                elapsedTime += Time.deltaTime;
+                levelUIManager.UpdateTimerDisplay(elapsedTime);
+            }
+            else if (countDownTime < 0f)
+            {
+                countDownTime = 3f;
+                isCountingDown = false;
+                levelUIManager.HideCountdown();
+                StartTimer();
+            }
+            else if (isCountingDown)
+            {
+                countDownTime -= Time.deltaTime;
+                levelUIManager.UpdateCountdownDisplay(countDownTime);
+            }
+
+            graphRenderer.UpdateGraph();
+        }
     }
 
     bool LevelFinished()
@@ -87,7 +118,6 @@ public class LevelManager : MonoBehaviour
 
     void StartTimer()
     {
-        elapsedTime = 0f;
         isTiming = true;
     }
 
@@ -115,6 +145,34 @@ public class LevelManager : MonoBehaviour
     {
         graphController.ResetState();
         levelUIManager.HideEndLevelScreen();
+        StartCountDown();
+    }
+
+    public void LoadMinigame(string minigameSceneName)
+    {
+        this.minigameSceneName = minigameSceneName;
+        this.isInMinigame = true;
+        this.isTiming = false;
+        SceneManager.LoadScene(minigameSceneName, LoadSceneMode.Additive);
+        SceneManager.sceneLoaded += MinigameLoaded;
+    }
+
+    void MinigameLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == minigameSceneName)
+        {
+            HideLevelObjects();
+            // Perform the call here
+            Debug.Log("Scene has been fully loaded!");
+
+            // Unsubscribe from the event to avoid multiple calls
+            SceneManager.sceneLoaded -= MinigameLoaded;
+        }
+    }
+
+    public void MinigameEndedCallback(float timeChange)
+    {
+        elapsedTime += timeChange;
         StartCountDown();
     }
 }

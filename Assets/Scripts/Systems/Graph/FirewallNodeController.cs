@@ -6,6 +6,6 @@ public class FirewallNodeController : NodeController
 {
     public override void OnMouseDown()
     {
-        levelManager.AddNodeToDataPath(nodeState);
+        levelManager.LoadMinigame("Wordle");
     }
 }
