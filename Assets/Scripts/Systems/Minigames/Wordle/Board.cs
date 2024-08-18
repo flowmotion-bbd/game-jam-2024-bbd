@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Board : MonoBehaviour
+public class Board : MinigameManager
 {
     private static readonly KeyCode[] KEYS = new KeyCode[] {
         KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F,
@@ -49,8 +49,10 @@ public class Board : MonoBehaviour
         feedbackBoxText = FeedbackBox.GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         TextAsset textFile = Resources.Load("valid_words") as TextAsset;
         validWords = textFile.text.Split("\n", System.StringSplitOptions.None);
 
@@ -105,8 +107,7 @@ public class Board : MonoBehaviour
     public void ReturnButtonMethod()
     {
         ClearState();
-        Debug.Log("Go back to game screen");
-        Debug.Log("Score is " +score);
+        gameManager.MinigameEnded(minigameWon, score);
     }
 
     private void SubmitRow(Row row)
@@ -162,6 +163,7 @@ public class Board : MonoBehaviour
         if (HasWon(row))
         {
             ToggleFeedback("YOU WON!");
+            minigameWon = true;
             score = MAX_SCORE - (rows.Length - rowIndex) * PER_ROW_SCORE;
             enabled = false;
             return;
@@ -174,6 +176,7 @@ public class Board : MonoBehaviour
         {
             ToggleFeedback("YOU LOST!");
             score = MAX_SCORE;
+            minigameWon = false;
             enabled = false;
         }
     }

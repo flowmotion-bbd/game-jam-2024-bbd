@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
 
     private bool isInMinigame = false;
     private string minigameSceneName = string.Empty;
+    private NodeState minigameNodeState; 
 
     [SerializeField] private List<GameObject> levelObjects = new List<GameObject>();
 
@@ -93,6 +94,13 @@ public class LevelManager : MonoBehaviour
             }
 
             graphRenderer.UpdateGraph();
+        } else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log("Escaped");
+                MinigameCallback(true, -5f);
+            }
         }
     }
 
@@ -148,20 +156,27 @@ public class LevelManager : MonoBehaviour
         StartCountDown();
     }
 
-    public void LoadMinigame(string minigameSceneName)
+    public void LoadMinigame(string minigameSceneName, NodeState nodeState)
     {
         this.minigameSceneName = minigameSceneName;
         this.isInMinigame = true;
         this.isTiming = false;
+        minigameNodeState = nodeState;
+        HideLevelObjects();
         SceneManager.LoadScene(minigameSceneName, LoadSceneMode.Additive);
         SceneManager.sceneLoaded += MinigameLoaded;
+    }
+
+    void UnloadMinigame()
+    {
+        SceneManager.UnloadSceneAsync(minigameSceneName);
+        SceneManager.sceneUnloaded += MinigameUnloaded;
     }
 
     void MinigameLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
         if (scene.name == minigameSceneName)
         {
-            HideLevelObjects();
             // Perform the call here
             Debug.Log("Scene has been fully loaded!");
 
@@ -170,9 +185,30 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void MinigameEndedCallback(float timeChange)
+    void MinigameUnloaded(UnityEngine.SceneManagement.Scene scene)
+    {
+        if (scene.name == minigameSceneName)
+        {
+            ShowLevelObjects();
+            // Perform the call here
+            Debug.Log("Scene has been fully unloaded!");
+
+            // Unsubscribe from the event to avoid multiple calls
+            SceneManager.sceneUnloaded -= MinigameUnloaded;
+        }
+    }
+
+    public void MinigameCallback(bool won, float timeChange)
     {
         elapsedTime += timeChange;
+        UnloadMinigame();
+        ShowLevelObjects();
         StartCountDown();
+        isInMinigame = false;
+
+        if (won)
+        {
+            AddNodeToDataPath(minigameNodeState);
+        }
     }
 }

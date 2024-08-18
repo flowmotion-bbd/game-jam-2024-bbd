@@ -2034,6 +2034,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5570680301760110125, guid: 3495232de2e45b24fa27acfb8fb96c37, type: 3}
+      propertyPath: minigameSceneName
+      value: Wordle
+      objectReference: {fileID: 0}
     - target: {fileID: 6984337716826931401, guid: 3495232de2e45b24fa27acfb8fb96c37, type: 3}
       propertyPath: m_Name
       value: FirewallNode

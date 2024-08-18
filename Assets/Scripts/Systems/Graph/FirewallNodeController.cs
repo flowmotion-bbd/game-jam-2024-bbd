@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class FirewallNodeController : NodeController
 {
+    [SerializeField] private string minigameSceneName;
+
     public override void OnMouseDown()
     {
-        levelManager.LoadMinigame("Wordle");
+        levelManager.LoadMinigame(minigameSceneName, GetComponent<NodeState>());
     }
 }
