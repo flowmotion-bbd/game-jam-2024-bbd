@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d9860fcd9d20ef847964cc956ea783fb
+guid: 6178e788c3437cc47af0b0fcb0e8a595
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8778175453553022843
-    second: firewall_0
+      213: -5600171000819769354
+    second: plaque_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 300
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: firewall_0
+      name: plaque_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 23
-        width: 292
-        height: 254
+        x: 1
+        y: 1
+        width: 318
+        height: 318
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b77d415f01852d970800000000000000
-      internalID: 8778175453553022843
+      spriteID: 6ff91be45223842b0800000000000000
+      internalID: -5600171000819769354
       vertices: []
       indices: 
       edges: []
@@ -144,7 +144,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      firewall_0: 8778175453553022843
+      plaque_0: -5600171000819769354
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
