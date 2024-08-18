@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.Port;
 
 public class EdgeRenderer : MonoBehaviour
 {
@@ -17,7 +14,6 @@ public class EdgeRenderer : MonoBehaviour
         {
             if (edge.NodeStateA != null && edge.NodeStateB != null)
             {
-                Undo.RecordObject(lineRenderer, "Update Line Renderer");
                 lineRenderer.SetPosition(0, edge.NodeStateA.transform.position);
                 lineRenderer.SetPosition(1, edge.NodeStateB.transform.position);
                 UpdateCollider();

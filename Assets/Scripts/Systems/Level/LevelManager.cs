@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -173,13 +171,16 @@ public class LevelManager : MonoBehaviour
 
     public void LoadMinigame(string minigameSceneName, NodeState nodeState)
     {
-        this.minigameSceneName = minigameSceneName;
-        this.isInMinigame = true;
-        this.isTiming = false;
-        minigameNodeState = nodeState;
-        HideLevelObjects();
-        SceneManager.LoadScene(minigameSceneName, LoadSceneMode.Additive);
-        SceneManager.sceneLoaded += MinigameLoaded;
+        if (graphState.RetrieveEdge(graphState.DataPaths[currentDataPathIndex].Path.Last(), nodeState) != null)
+        {
+            this.minigameSceneName = minigameSceneName;
+            this.isInMinigame = true;
+            this.isTiming = false;
+            minigameNodeState = nodeState;
+            HideLevelObjects();
+            SceneManager.LoadScene(minigameSceneName, LoadSceneMode.Additive);
+            SceneManager.sceneLoaded += MinigameLoaded;
+        }
     }
 
     void UnloadMinigame()

@@ -198,9 +198,10 @@ public class Board : MinigameManager
 
     private bool IsValidWord(string word)
     {
-        for (int i = 0; i < validWords.Length; i++)
-            if (string.Equals(word, validWords[i], System.StringComparison.OrdinalIgnoreCase))
+        foreach (string validWord in validWords) {
+            if (string.Equals(word, validWord, System.StringComparison.OrdinalIgnoreCase))
                 return true;
+        }
 
         return false;
     }
@@ -208,8 +209,10 @@ public class Board : MinigameManager
     private bool HasWon(Row row)
     {
         for (int tileIndex = 0; tileIndex < row.Tiles.Length; tileIndex++)
+        {
             if (row.Tiles[tileIndex].Style != CorrectStyle)
                 return false;
+        }
 
         return true;
     }
