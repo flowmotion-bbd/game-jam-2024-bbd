@@ -1,13 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class FirewallNodeController : NodeController
+public class FirewallNodeController : MinigameNodeController
 {
     [SerializeField] private string minigameSceneName;
 
+    public override void MinigameLost()
+    {
+        levelManager.RemoveEdgeFromGraph(nodeState);
+    }
+
     public override void OnMouseDown()
     {
-        levelManager.LoadMinigame(minigameSceneName, GetComponent<NodeState>());
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        levelManager.LoadMinigame(minigameSceneName, nodeState);
     }
 }

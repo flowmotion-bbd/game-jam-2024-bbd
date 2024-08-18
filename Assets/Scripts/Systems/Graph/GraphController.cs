@@ -6,26 +6,13 @@ using UnityEngine;
 public class GraphController : MonoBehaviour
 {
     private GraphState graphState;
-    private int currentDataPathIndex = 0;
-
-    public int CurrentDataPathIndex
-    {
-        get { return currentDataPathIndex; }
-        set
-        {
-            if (currentDataPathIndex >= 0 && currentDataPathIndex < graphState.DataPaths.Count)
-            {
-                currentDataPathIndex = value;
-            }
-        }
-    }
 
     void Start()
     {
         graphState = GetComponent<GraphState>();
     }
 
-    public void AddNodeToDataPath(NodeState nodeState)
+    public void AddNodeToDataPath(int currentDataPathIndex, NodeState nodeState)
     {
         if (graphState.RetrieveEdge(graphState.DataPaths[currentDataPathIndex].Path.Last(), nodeState)  != null)
         {
@@ -33,7 +20,7 @@ public class GraphController : MonoBehaviour
         }
     }
 
-    public void RemoveEdgeFromDataPath(EdgeState edgeState)
+    public void RemoveEdgeFromDataPath(int currentDataPathIndex, EdgeState edgeState)
     {
         NodeState nodeStateToRemove = edgeState.Edge.NodeStateA;
         int nodeIndex = graphState.DataPaths[currentDataPathIndex].Path.IndexOf(nodeStateToRemove);
@@ -94,7 +81,14 @@ public class GraphController : MonoBehaviour
 
     public void ResetState()
     {
-        currentDataPathIndex = 0;
         graphState.ResetState();
+    }
+
+    public void RemoveEdge(NodeState startNode, NodeState endNode)
+    {
+        if (graphState.RetrieveEdgeWithNode(endNode).Count() > 1)
+        {
+            graphState.RetrieveEdge(startNode, endNode).gameObject.SetActive(false);
+        }
     }
 }

@@ -12,7 +12,7 @@ public class GraphRenderer : MonoBehaviour
         graphState = GetComponent<GraphState>();
     }
 
-    public void UpdateGraph()
+    public void UpdateGraph(int currentDataPathIndex)
     {
         foreach (EdgeState edgeState in graphState.Graph.Edges)
         {
@@ -47,7 +47,7 @@ public class GraphRenderer : MonoBehaviour
             }
         }
 
-        DataPath currentDataPath = graphState.DataPaths[GetComponent<GraphController>().CurrentDataPathIndex];
+        DataPath currentDataPath = graphState.DataPaths[currentDataPathIndex];
 
         currentDataPath.Path.First().GetComponent<NodeRenderer>().ToggleSelected(true, currentDataPath.Colour);
         

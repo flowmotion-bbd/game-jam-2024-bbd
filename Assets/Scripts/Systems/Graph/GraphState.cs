@@ -47,8 +47,6 @@ public class GraphState : MonoBehaviour
         {
             origDataPaths.Add(new DataPath(dataPath));
         }
-
-        GetComponent<GraphRenderer>().UpdateGraph();
     }
 
     public void AddNodeToDataPath(int dataPathIndex, NodeState nodeState)

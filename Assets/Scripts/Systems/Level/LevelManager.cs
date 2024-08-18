@@ -11,6 +11,20 @@ public class LevelManager : MonoBehaviour
     private GraphState graphState;
     private GraphRenderer graphRenderer;
 
+    private int currentDataPathIndex = 0;
+
+    public int CurrentDataPathIndex
+    {
+        get { return currentDataPathIndex; }
+        set
+        {
+            if (currentDataPathIndex >= 0 && currentDataPathIndex < graphState.DataPaths.Count)
+            {
+                currentDataPathIndex = value;
+            }
+        }
+    }
+
     private LevelUIManager levelUIManager;
 
     private float elapsedTime = 0f;
@@ -71,7 +85,7 @@ public class LevelManager : MonoBehaviour
 
                 if (Input.GetKeyDown(mainKey) || Input.GetKeyDown(numpadKey))
                 {
-                    graphState.GetComponent<GraphController>().CurrentDataPathIndex = i - 1;
+                    currentDataPathIndex = i - 1;
                 }
             }
 
@@ -93,7 +107,7 @@ public class LevelManager : MonoBehaviour
                 levelUIManager.UpdateCountdownDisplay(countDownTime);
             }
 
-            graphRenderer.UpdateGraph();
+            graphRenderer.UpdateGraph(currentDataPathIndex);
         } else
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -141,16 +155,17 @@ public class LevelManager : MonoBehaviour
             elapsedTime += nodeState.Node.CompromisationTime;
         }
 
-        graphController.AddNodeToDataPath(nodeState);
+        graphController.AddNodeToDataPath(currentDataPathIndex, nodeState);
     }
 
     public void RemoveEdgeFromDataPath(EdgeState edgeState)
     {
-        graphController.RemoveEdgeFromDataPath(edgeState);
+        graphController.RemoveEdgeFromDataPath(currentDataPathIndex, edgeState);
     }
 
     public void RestartLevel()
     {
+        currentDataPathIndex = 0;
         graphController.ResetState();
         levelUIManager.HideEndLevelScreen();
         StartCountDown();
@@ -210,5 +225,10 @@ public class LevelManager : MonoBehaviour
         {
             AddNodeToDataPath(minigameNodeState);
         }
+    }
+
+    public void RemoveEdgeFromGraph(NodeState nodeState)
+    {
+        graphController.RemoveEdge(graphState.DataPaths[currentDataPathIndex].Path.Last(), nodeState);
     }
 }

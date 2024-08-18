@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class NodeController : MonoBehaviour
 {
-    protected NodeState nodeState;
-    protected LevelManager levelManager;
+    public NodeState nodeState;
+    public LevelManager levelManager;
 
     void Awake()
     {

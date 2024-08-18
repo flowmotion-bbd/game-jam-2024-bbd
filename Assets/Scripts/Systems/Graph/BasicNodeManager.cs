@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.EventSystems;
 
 public class BasicNodeController : NodeController
 {
     public override void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         levelManager.AddNodeToDataPath(nodeState);
     }
 

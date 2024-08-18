@@ -9,6 +9,11 @@ public abstract class MinigameManager : MonoBehaviour
 
     protected void Start()
     {
-        gameManager = GetComponent<GameManager>();
+        gameManager = GameManager.Instance;
+    }
+
+    protected void EndMinigame(float timeChange)
+    {
+        gameManager.MinigameEnded(false, timeChange);
     }
 }
