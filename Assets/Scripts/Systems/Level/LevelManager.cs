@@ -11,18 +11,6 @@ public class LevelManager : MonoBehaviour
 
     private int currentDataPathIndex = 0;
 
-    public int CurrentDataPathIndex
-    {
-        get { return currentDataPathIndex; }
-        set
-        {
-            if (currentDataPathIndex >= 0 && currentDataPathIndex < graphState.DataPaths.Count)
-            {
-                currentDataPathIndex = value;
-            }
-        }
-    }
-
     private LevelUIManager levelUIManager;
 
     private float elapsedTime = 0f;
@@ -37,6 +25,20 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private List<GameObject> levelObjects = new List<GameObject>();
 
+    private DialogueManager dialogueManager;
+    [SerializeField] private Dialogue levelStartDialogue;
+
+    public int CurrentDataPathIndex
+    {
+        get { return currentDataPathIndex; }
+        set
+        {
+            if (currentDataPathIndex >= 0 && currentDataPathIndex < graphState.DataPaths.Count)
+            {
+                currentDataPathIndex = value;
+            }
+        }
+    }
     void Start()
     {
         graphController = FindAnyObjectByType<GraphController>();
@@ -45,10 +47,18 @@ public class LevelManager : MonoBehaviour
 
         levelUIManager = FindAnyObjectByType<LevelUIManager>();
 
+        dialogueManager = FindAnyObjectByType<DialogueManager>();
+
         elapsedTime = 0f;
 
         ShowLevelObjects();
-        StartCountDown();
+        //StartCountDown();
+        LevelStartDialogue();
+    }
+
+    void LevelStartDialogue()
+    {
+        dialogueManager.StartDialogue(levelStartDialogue, StartCountDown);
     }
 
     void HideLevelObjects()

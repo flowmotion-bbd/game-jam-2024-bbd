@@ -63,7 +63,10 @@ public class GraphState : MonoBehaviour
     {
         foreach (EdgeState edgeState in graph.Edges)
         {
-            if (edgeState.Edge.ContainsNode(node1) && edgeState.Edge.ContainsNode(node2))
+            if (
+                (edgeState.Edge.NodeStateA == node1 && edgeState.Edge.NodeStateB == node2) ||
+                (edgeState.Edge.NodeStateA == node2 && edgeState.Edge.NodeStateB == node1)
+            )
             {
                 return edgeState;
             }

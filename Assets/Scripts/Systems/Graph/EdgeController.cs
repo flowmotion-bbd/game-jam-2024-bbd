@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.EventSystems;
 
 public class EdgeController : MonoBehaviour
 {
@@ -17,6 +15,11 @@ public class EdgeController : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         levelManager.RemoveEdgeFromDataPath(edgeState);
     }
 }

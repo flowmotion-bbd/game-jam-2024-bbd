@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,9 +8,9 @@ public class LevelUIManager : MonoBehaviour
     [SerializeField] private GameObject endLevelScreen;
     [SerializeField] private GameObject countDownScreen;
 
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] TextMeshProUGUI endScreenTimeText;
-    [SerializeField] TextMeshProUGUI countDownText;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI endScreenTimeText;
+    [SerializeField] private TextMeshProUGUI countDownText;
     private LevelManager levelManager;
 
     void Start()
@@ -51,6 +51,8 @@ public class LevelUIManager : MonoBehaviour
 
     List<float> SplitTime(float time)
     {
+        time = Math.Abs(time);
+
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time - minutes * 60);
         int milliseconds = Mathf.FloorToInt((time * 1000) % 1000);
@@ -66,7 +68,9 @@ public class LevelUIManager : MonoBehaviour
     string FormatTime(float time)
     {
         List<float> splitTime = SplitTime(time);
-        return string.Format("{0:00}:{1:00}:{2:000}", splitTime[0], splitTime[1], splitTime[2]);
+
+        string signAppend = time < 0f ? "-" : "";
+        return signAppend + string.Format("{0:00}:{1:00}:{2:000}", splitTime[0], splitTime[1], splitTime[2]);
     }
 
     public void UpdateCountdownDisplay(float countDownTime)
