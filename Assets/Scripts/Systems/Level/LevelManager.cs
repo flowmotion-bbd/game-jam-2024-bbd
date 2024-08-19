@@ -47,12 +47,11 @@ public class LevelManager : MonoBehaviour
 
         levelUIManager = FindAnyObjectByType<LevelUIManager>();
 
-        dialogueManager = FindAnyObjectByType<DialogueManager>();
+        dialogueManager = DialogueManager.Instance;
 
         elapsedTime = 0f;
 
         ShowLevelObjects();
-        //StartCountDown();
         LevelStartDialogue();
     }
 
@@ -121,7 +120,7 @@ public class LevelManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Debug.Log("Escaped");
-                MinigameCallback(true, -5f);
+                MinigameCallback(false, 5f, new Dialogue());
             }
         }
     }
@@ -131,6 +130,9 @@ public class LevelManager : MonoBehaviour
         foreach (DataPath dataPath in graphState.DataPaths)
         {
             if (!graphState.Graph.EndNodes.Contains(dataPath.Path.Last()))
+            {
+                return false;
+            } else if (!dataPath.IsValid())
             {
                 return false;
             }
@@ -158,6 +160,11 @@ public class LevelManager : MonoBehaviour
 
     public void AddNodeToDataPath(NodeState nodeState)
     {
+        if (!isTiming)
+        {
+            return;
+        }
+
         if (!nodeState.Node.Compromised)
         {
             elapsedTime += nodeState.Node.CompromisationTime;
@@ -168,6 +175,11 @@ public class LevelManager : MonoBehaviour
 
     public void RemoveEdgeFromDataPath(EdgeState edgeState)
     {
+        if (!isTiming)
+        {
+            return;
+        }
+
         graphController.RemoveEdgeFromDataPath(currentDataPathIndex, edgeState);
     }
 
@@ -181,6 +193,11 @@ public class LevelManager : MonoBehaviour
 
     public void LoadMinigame(string minigameSceneName, NodeState nodeState)
     {
+        if (!isTiming)
+        {
+            return;
+        }
+
         if (graphState.RetrieveEdge(graphState.DataPaths[currentDataPathIndex].Path.Last(), nodeState) != null)
         {
             this.minigameSceneName = minigameSceneName;
@@ -224,18 +241,22 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void MinigameCallback(bool won, float timeChange)
+    public void MinigameCallback(bool won, float timeChange, Dialogue dialogue)
     {
         elapsedTime += timeChange;
         UnloadMinigame();
         ShowLevelObjects();
-        StartCountDown();
         isInMinigame = false;
 
         if (won)
         {
             AddNodeToDataPath(minigameNodeState);
+        } else
+        {
+            minigameNodeState.GetComponent<MinigameNodeController>().MinigameLost();
         }
+
+        dialogueManager.StartDialogue(dialogue, StartCountDown);
     }
 
     public void RemoveEdgeFromGraph(NodeState nodeState)

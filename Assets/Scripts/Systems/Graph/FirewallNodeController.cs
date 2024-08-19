@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class FirewallNodeController : MinigameNodeController
 {
@@ -12,11 +11,6 @@ public class FirewallNodeController : MinigameNodeController
 
     public override void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
         levelManager.LoadMinigame(minigameSceneName, nodeState);
     }
 }

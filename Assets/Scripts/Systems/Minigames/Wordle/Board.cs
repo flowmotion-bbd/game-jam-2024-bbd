@@ -62,13 +62,6 @@ public class Board : MinigameManager
         solutionHints = solutionHints[Random.Range(0, solutionHints.Length)].Split(",");
         solution = solutionHints[0].ToLower().Trim();
         hint = solutionHints[1];
-
-        HintText.text = "HINT: " + hint;
-        HintText.gameObject.SetActive(true);
-
-        // Start game
-        ClearState();
-        enabled = true;
     }
 
     private void Update()
@@ -107,7 +100,7 @@ public class Board : MinigameManager
     public void ReturnButtonMethod()
     {
         ClearState();
-        gameManager.MinigameEnded(minigameWon, score);
+        EndMinigame(score);
     }
 
     private void SubmitRow(Row row)
@@ -243,5 +236,15 @@ public class Board : MinigameManager
     private void OnDisable()
     {
         ReturnButton.SetActive(true);
+    }
+
+    protected override void StartMinigame()
+    {
+        HintText.text = "HINT: " + hint;
+        HintText.gameObject.SetActive(true);
+
+        // Start game
+        ClearState();
+        enabled = true;
     }
 }

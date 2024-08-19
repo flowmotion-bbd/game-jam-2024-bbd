@@ -75,7 +75,7 @@ public class GraphState : MonoBehaviour
         return null;
     }
 
-    public IEnumerable<EdgeState> RetrieveEdgeWithNode(NodeState node)
+    public IEnumerable<EdgeState> RetrieveEdgesWithNode(NodeState node)
     {
         return graph.Edges.Where(edgeState => edgeState.Edge.ContainsNode(node));
     }
@@ -97,5 +97,10 @@ public class GraphState : MonoBehaviour
         {
             nodeState.ResetState();
         }
+    }
+
+    public void RemoveEdge(EdgeState edge)
+    {
+        graph.Edges.Remove(edge);
     }
 }

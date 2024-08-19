@@ -6,7 +6,6 @@ using UnityEngine;
 public class GraphController : MonoBehaviour
 {
     private GraphState graphState;
-
     void Start()
     {
         graphState = GetComponent<GraphState>();
@@ -69,7 +68,7 @@ public class GraphController : MonoBehaviour
         {
             foreach (NodeState nodeState in dataPath.Path)
             {
-                IEnumerable<EdgeState> connectedEdges = graphState.RetrieveEdgeWithNode(nodeState);
+                IEnumerable<EdgeState> connectedEdges = graphState.RetrieveEdgesWithNode(nodeState);
 
                 foreach (EdgeState connectedEdge in connectedEdges)
                 {
@@ -86,9 +85,12 @@ public class GraphController : MonoBehaviour
 
     public void RemoveEdge(NodeState startNode, NodeState endNode)
     {
-        if (graphState.RetrieveEdgeWithNode(endNode).Count() > 1)
+        IEnumerable<EdgeState> edgesToEndNode = graphState.RetrieveEdgesWithNode(endNode);
+        if (edgesToEndNode.Count() > 2)
         {
-            graphState.RetrieveEdge(startNode, endNode).gameObject.SetActive(false);
+            EdgeState edge = graphState.RetrieveEdge(startNode, endNode);
+            edge.gameObject.SetActive(false);
+            graphState.RemoveEdge(edge);
         }
     }
 }

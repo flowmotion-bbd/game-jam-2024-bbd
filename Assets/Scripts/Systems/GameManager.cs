@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,13 +20,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MinigameEnded(bool won, float timeChange)
+    public void MinigameEnded(bool won, float timeChange, Dialogue dialogue)
     {
         LevelManager levelManager = FindAnyObjectByType<LevelManager>();
 
         if (levelManager != null)
         {
-            levelManager.MinigameCallback(won, timeChange);
+            levelManager.MinigameCallback(won, timeChange, dialogue);
         }
         else
         {

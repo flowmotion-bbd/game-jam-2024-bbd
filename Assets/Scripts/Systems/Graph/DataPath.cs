@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -43,5 +44,23 @@ public class DataPath
         {
             this.path.Add(nodeState);
         }
+    }
+
+    public bool IsValid()
+    {
+        if (path.First().Node.NodeType == NodeTypeEnum.EncryptedData)
+        {
+            foreach (NodeState nodeState in path)
+            {
+                if (nodeState.Node.NodeType == NodeTypeEnum.DecryptionHub)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return true;
     }
 }
