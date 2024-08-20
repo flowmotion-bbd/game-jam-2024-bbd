@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 937c694501214af4a80955ca1a079c41
+guid: 629320916ef322d4683a8a832421dbd6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7670485267309540912
-    second: lock_0
+      213: 7558696867960387976
+    second: eggress_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lock_0
+      name: eggress_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 300
-        height: 292
+        x: 23
+        y: 7
+        width: 249
+        height: 280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0d9c5231a46fc8590800000000000000
-      internalID: -7670485267309540912
+      spriteID: 889f2a3f0c2e5e860800000000000000
+      internalID: 7558696867960387976
       vertices: []
       indices: 
       edges: []
@@ -144,7 +144,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      lock_0: -7670485267309540912
+      eggress_0: 7558696867960387976
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
