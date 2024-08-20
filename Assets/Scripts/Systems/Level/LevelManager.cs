@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
     private DialogueManager dialogueManager;
     [SerializeField] private Dialogue levelStartDialogue;
 
+    private GameManager gameManager;
+
     public int CurrentDataPathIndex
     {
         get { return currentDataPathIndex; }
@@ -48,6 +50,7 @@ public class LevelManager : MonoBehaviour
         levelUIManager = FindAnyObjectByType<LevelUIManager>();
 
         dialogueManager = DialogueManager.Instance;
+        gameManager = GameManager.Instance;
 
         elapsedTime = 0f;
 
@@ -60,7 +63,12 @@ public class LevelManager : MonoBehaviour
         dialogueManager.StartDialogue(levelStartDialogue, StartCountDown);
     }
 
-    void HideLevelObjects()
+    void StartCountDown()
+    {
+        StartCoroutine("CountDown");
+    }
+
+    public void HideLevelObjects()
     {
         foreach (GameObject obj in levelObjects)
         {
@@ -120,9 +128,36 @@ public class LevelManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Debug.Log("Escaped");
-                MinigameCallback(false, 5f, new Dialogue());
+                MinigameCallback(true, -5f, new Dialogue());
             }
         }
+    }
+
+    // Coroutine that runs the timer
+    IEnumerator CountDown()
+    {
+        countDownTime = 3f;
+        isCountingDown = true;
+        levelUIManager.ShowCountdown();
+
+        // Loop until 5 seconds have elapsed
+        while (countDownTime > 0f)
+        {
+            countDownTime -= Time.deltaTime;
+
+            if (countDownTime < 0)
+            {
+                countDownTime = 0;
+            }
+
+            levelUIManager.UpdateCountdownDisplay(countDownTime);
+
+            yield return null;
+        }
+
+        isCountingDown = false;
+        levelUIManager.HideCountdown();
+        StartTimer();
     }
 
     bool LevelFinished()
@@ -141,13 +176,6 @@ public class LevelManager : MonoBehaviour
         return true;
     }
 
-    void StartCountDown()
-    {
-        countDownTime = 3f;
-        isCountingDown = true;
-        levelUIManager.ShowCountdown();
-    }
-
     void StartTimer()
     {
         isTiming = true;
@@ -163,11 +191,6 @@ public class LevelManager : MonoBehaviour
         if (!isTiming)
         {
             return;
-        }
-
-        if (!nodeState.Node.Compromised)
-        {
-            elapsedTime += nodeState.Node.CompromisationTime;
         }
 
         graphController.AddNodeToDataPath(currentDataPathIndex, nodeState);
@@ -204,41 +227,14 @@ public class LevelManager : MonoBehaviour
             this.isInMinigame = true;
             this.isTiming = false;
             minigameNodeState = nodeState;
-            HideLevelObjects();
-            SceneManager.LoadScene(minigameSceneName, LoadSceneMode.Additive);
-            SceneManager.sceneLoaded += MinigameLoaded;
+            gameManager.LoadMinigame(minigameSceneName, true, HideLevelObjects);
         }
     }
 
     void UnloadMinigame()
     {
-        SceneManager.UnloadSceneAsync(minigameSceneName);
-        SceneManager.sceneUnloaded += MinigameUnloaded;
-    }
-
-    void MinigameLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == minigameSceneName)
-        {
-            // Perform the call here
-            Debug.Log("Scene has been fully loaded!");
-
-            // Unsubscribe from the event to avoid multiple calls
-            SceneManager.sceneLoaded -= MinigameLoaded;
-        }
-    }
-
-    void MinigameUnloaded(UnityEngine.SceneManagement.Scene scene)
-    {
-        if (scene.name == minigameSceneName)
-        {
-            ShowLevelObjects();
-            // Perform the call here
-            Debug.Log("Scene has been fully unloaded!");
-
-            // Unsubscribe from the event to avoid multiple calls
-            SceneManager.sceneUnloaded -= MinigameUnloaded;
-        }
+        gameManager.UnloadMinigame(minigameSceneName);
+        ShowLevelObjects();
     }
 
     public void MinigameCallback(bool won, float timeChange, Dialogue dialogue)
@@ -250,7 +246,7 @@ public class LevelManager : MonoBehaviour
 
         if (won)
         {
-            AddNodeToDataPath(minigameNodeState);
+            graphController.AddNodeToDataPath(currentDataPathIndex, minigameNodeState);
         } else
         {
             minigameNodeState.GetComponent<MinigameNodeController>().MinigameLost();

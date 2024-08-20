@@ -51,12 +51,19 @@ public class GraphState : MonoBehaviour
 
     public void AddNodeToDataPath(int dataPathIndex, NodeState nodeState)
     {
-        dataPaths[dataPathIndex].AddNodeToPath(nodeState);
+        if (dataPaths[dataPathIndex].Enabled)
+        {
+            Debug.Log("ADDING NODE");
+            dataPaths[dataPathIndex].AddNodeToPath(nodeState);
+        }
     }
 
     public void RemoveNodeFromDataPath(int dataPathIndex, NodeState nodeState)
     {
-        dataPaths[dataPathIndex].RemoveNodeFromPath(nodeState);
+        if (dataPaths[dataPathIndex].Enabled)
+        {
+            dataPaths[dataPathIndex].RemoveNodeFromPath(nodeState);
+        }
     }
 
     public EdgeState RetrieveEdge(NodeState node1, NodeState node2)

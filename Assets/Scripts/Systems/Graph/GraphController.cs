@@ -16,6 +16,7 @@ public class GraphController : MonoBehaviour
         if (graphState.RetrieveEdge(graphState.DataPaths[currentDataPathIndex].Path.Last(), nodeState)  != null)
         {
             graphState.AddNodeToDataPath(currentDataPathIndex, nodeState);
+            nodeState.GetComponent<NodeController>().CompromiseNode(graphState.DataPaths[currentDataPathIndex]);
         }
     }
 
@@ -40,8 +41,8 @@ public class GraphController : MonoBehaviour
 
     void Update()
     {
-        UpdateNodes();
         UpdateEdges();
+        UpdateNodes();
     }
 
     void UpdateNodes()
@@ -52,14 +53,6 @@ public class GraphController : MonoBehaviour
             visibleEdge.Edge.NodeStateA.Node.Visible = true;
             visibleEdge.Edge.NodeStateB.Node.Visible = true;
         }
-
-        foreach (DataPath dataPath in graphState.DataPaths)
-        {
-            foreach (NodeState nodeState in dataPath.Path)
-            {
-                nodeState.Node.Compromised = true;
-            }
-        }
     }
 
     void UpdateEdges()
@@ -68,11 +61,14 @@ public class GraphController : MonoBehaviour
         {
             foreach (NodeState nodeState in dataPath.Path)
             {
-                IEnumerable<EdgeState> connectedEdges = graphState.RetrieveEdgesWithNode(nodeState);
-
-                foreach (EdgeState connectedEdge in connectedEdges)
+                if (nodeState.Node.Compromised)
                 {
-                    connectedEdge.Edge.Visible = true;
+                    IEnumerable<EdgeState> connectedEdges = graphState.RetrieveEdgesWithNode(nodeState);
+
+                    foreach (EdgeState connectedEdge in connectedEdges)
+                    {
+                        connectedEdge.Edge.Visible = true;
+                    }
                 }
             }
         }

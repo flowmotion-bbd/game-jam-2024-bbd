@@ -10,9 +10,14 @@ public class NodeState : MonoBehaviour
         set { node = value; }
     }
 
+    void Start()
+    {
+        node.CompromisationTime = node.InitCompromisationTime;
+    }
+
     public void ResetState()
     {
         node.Visible = false;
-        node.Compromised = false;
+        node.CompromisationTime = node.InitCompromisationTime;
     }
 }

@@ -8,6 +8,7 @@ public class DataPath
 {
     [SerializeField] private Color colour;
     [SerializeField] private List<NodeState> path = new List<NodeState>();
+    [SerializeField] private bool enabled = true;
 
     public Color Colour
     {
@@ -17,6 +18,12 @@ public class DataPath
     public List<NodeState> Path
     {
         get { return path; }
+    }
+
+    public bool Enabled
+    {
+        get { return enabled; }
+        set { enabled = value; }
     }
 
     public void AddNodeToPath(NodeState nodeState)

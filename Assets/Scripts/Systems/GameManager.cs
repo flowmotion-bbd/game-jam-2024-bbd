@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private string defaultSceneName = "Main Menu";
 
-    private void Awake()
+    private TransitionManager transitionManager;
+
+    private string minigameSceneName = string.Empty;
+
+    void Awake()
     {
         if (Instance == null)
         {
@@ -18,6 +23,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        transitionManager = TransitionManager.Instance;
     }
 
     public void MinigameEnded(bool won, float timeChange, Dialogue dialogue)
@@ -32,5 +42,20 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(defaultSceneName);
         }
+    }
+
+    public void LoadLevel(string levelSceneName)
+    {
+        SceneManager.LoadScene(levelSceneName);
+    }
+
+    public void LoadMinigame(string minigameSceneName, bool additive, Action transitionCallback)
+    {
+        transitionManager.TransitionBetweenMinigames(minigameSceneName, additive, transitionCallback);
+    }
+
+    public void UnloadMinigame(string minigameSceneName)
+    {
+        SceneManager.UnloadSceneAsync(minigameSceneName);
     }
 }
