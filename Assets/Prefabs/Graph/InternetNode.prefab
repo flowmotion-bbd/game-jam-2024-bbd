@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 3580363091570687224}
   - component: {fileID: 6694926070322760744}
   m_Layer: 0
-  m_Name: EgressNode
+  m_Name: InternetNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

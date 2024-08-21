@@ -3,10 +3,10 @@ public enum NodeTypeEnum
     Basic,
     Firewall,
     PasswordProtected,
-    Egress,
+    Internet,
     NetworkRouter,
     IntrusionDetectionSystem,
-    DecryptionHub,
+    Decryption,
     Data,
     EncryptedData
 }

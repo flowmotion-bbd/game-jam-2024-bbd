@@ -59,7 +59,7 @@ public class DataPath
         {
             foreach (NodeState nodeState in path)
             {
-                if (nodeState.Node.NodeType == NodeTypeEnum.DecryptionHub)
+                if (nodeState.Node.NodeType == NodeTypeEnum.Decryption)
                 {
                     return true;
                 }
