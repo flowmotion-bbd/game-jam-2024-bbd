@@ -13,6 +13,11 @@ public class GraphController : MonoBehaviour
 
     public void AddNodeToDataPath(int currentDataPathIndex, NodeState nodeState)
     {
+        if (!graphState.DataPaths[currentDataPathIndex].Enabled)
+        {
+            return;
+        }
+
         if (graphState.RetrieveEdge(graphState.DataPaths[currentDataPathIndex].Path.Last(), nodeState)  != null)
         {
             graphState.AddNodeToDataPath(currentDataPathIndex, nodeState);
@@ -22,6 +27,11 @@ public class GraphController : MonoBehaviour
 
     public void RemoveEdgeFromDataPath(int currentDataPathIndex, EdgeState edgeState)
     {
+        if (!graphState.DataPaths[currentDataPathIndex].Enabled)
+        {
+            return;
+        }
+
         NodeState nodeStateToRemove = edgeState.Edge.NodeStateA;
         int nodeIndex = graphState.DataPaths[currentDataPathIndex].Path.IndexOf(nodeStateToRemove);
 

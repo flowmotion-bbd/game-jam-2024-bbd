@@ -7,8 +7,6 @@ public abstract class NodeController : MonoBehaviour
     public LevelManager levelManager;
     public NodeRenderer nodeRenderer;
 
-    private DataPath currentDataPath;
-
     void Awake()
     {
         levelManager = FindAnyObjectByType<LevelManager>();
@@ -18,13 +16,18 @@ public abstract class NodeController : MonoBehaviour
 
     public abstract void OnMouseDown();
 
-    IEnumerator StartCompromise()
+    IEnumerator StartCompromise(DataPath dataPath)
     {
-        currentDataPath.Enabled = false;
+        dataPath.Enabled = false;
 
         while (nodeState.Node.CompromisationTime > 0f)
         {
-            Debug.Log("COMPROMISING NODE");
+            if (!levelManager.IsTiming)
+            {
+                yield break;
+            }
+
+            Debug.Log("Compromising");
             nodeState.Node.CompromisationTime  -= Time.deltaTime;
             nodeRenderer.SetCompromiseRadial(nodeState.Node.CompromisationTime / nodeState.Node.InitCompromisationTime);
 
@@ -32,12 +35,11 @@ public abstract class NodeController : MonoBehaviour
         }
 
         nodeState.Node.Compromised = true;
-        currentDataPath.Enabled = true;
+        dataPath.Enabled = true;
     }
     
     public void CompromiseNode(DataPath dataPath)
     {
-        currentDataPath = dataPath;
-        StartCoroutine("StartCompromise");
+        StartCoroutine(StartCompromise(dataPath));
     }
 }

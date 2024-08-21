@@ -53,7 +53,6 @@ public class GraphState : MonoBehaviour
     {
         if (dataPaths[dataPathIndex].Enabled)
         {
-            Debug.Log("ADDING NODE");
             dataPaths[dataPathIndex].AddNodeToPath(nodeState);
         }
     }

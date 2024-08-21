@@ -19,23 +19,11 @@ public class LevelUIManager : MonoBehaviour
 
         timerText.text = FormatTime(0f);
 
-        HideEndLevelScreen();    
+        HideEndLevelScreen();
     }
-    public void ShowEndLevelScreen(List<float> topTimes, float usersTime)
+    public void ShowEndLevelScreen()
     {
-        UpdateTopTimes(topTimes, usersTime);
         endLevelScreen.SetActive(true);
-    }
-
-    void UpdateTopTimes(List<float> topTimes, float usersTime)
-    {
-        endScreenTimeText.text = "";
-        for (int i = 0; i < topTimes.Count; i++) 
-        {
-            endScreenTimeText.text += i + ". " + FormatTime(topTimes[i]) + "\n";
-        }
-
-        endScreenTimeText.text += "4. " + FormatTime(usersTime);
     }
 
     public void HideEndLevelScreen()
@@ -80,7 +68,7 @@ public class LevelUIManager : MonoBehaviour
             return;
         }
 
-       int countDown = Mathf.CeilToInt(countDownTime);
+        int countDown = Mathf.CeilToInt(countDownTime);
         countDownText.text = countDown.ToString();
     }
 
@@ -93,5 +81,10 @@ public class LevelUIManager : MonoBehaviour
     public void HideCountdown()
     {
         countDownScreen.SetActive(false);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        levelManager.ReturnToMainMenu();
     }
 }

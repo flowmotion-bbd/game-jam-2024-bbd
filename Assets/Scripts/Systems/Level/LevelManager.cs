@@ -41,6 +41,11 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+    public bool IsTiming
+    {
+        get { return isTiming; }
+    }
+
     void Start()
     {
         graphController = FindAnyObjectByType<GraphController>();
@@ -90,7 +95,7 @@ public class LevelManager : MonoBehaviour
             if (LevelFinished())
             {
                 StopTimer();
-                FindFirstObjectByType<LevelUIManager>().ShowEndLevelScreen(new List<float>() { 20, 20, 20 }, elapsedTime);
+                FindFirstObjectByType<LevelUIManager>().ShowEndLevelScreen();
             }
 
             for (int i = 0; i <= 9; i++)
@@ -158,6 +163,19 @@ public class LevelManager : MonoBehaviour
         isCountingDown = false;
         levelUIManager.HideCountdown();
         StartTimer();
+        RestartCompromising();
+    }
+
+    void RestartCompromising()
+    {
+        foreach (DataPath dataPath in graphState.DataPaths)
+        {
+            NodeState nodeState = dataPath.Path.Last();
+            if (!nodeState.Node.Compromised)
+            {
+                nodeState.GetComponent<NodeController>().CompromiseNode(dataPath);
+            }
+        }
     }
 
     bool LevelFinished()
@@ -216,7 +234,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadMinigame(string minigameSceneName, NodeState nodeState)
     {
-        if (!isTiming)
+        if (!isTiming || !graphState.DataPaths[currentDataPathIndex].Enabled)
         {
             return;
         }
@@ -258,5 +276,10 @@ public class LevelManager : MonoBehaviour
     public void RemoveEdgeFromGraph(NodeState nodeState)
     {
         graphController.RemoveEdge(graphState.DataPaths[currentDataPathIndex].Path.Last(), nodeState);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        gameManager.LoadLevel("Main Menu");
     }
 }
