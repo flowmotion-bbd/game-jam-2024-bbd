@@ -16,7 +16,7 @@ TagManager:
   - Path
   - Obstacles
   - Finish
-  - 
+  - Nodes
   - 
   - 
   - 
@@ -46,4 +46,13 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Edges
+    uniqueID: 2739619181
+    locked: 0
+  - name: Node Background
+    uniqueID: 2586096839
+    locked: 0
+  - name: Nodes
+    uniqueID: 1536645513
     locked: 0

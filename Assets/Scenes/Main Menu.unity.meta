@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/ArtExample.unity.meta
+guid: 4cc72062abc128a4cbbcc5cca25fb3cf
+========
 guid: 5ca4acbc90337c049ab2a85bf5daac07
+>>>>>>>> 881f8f72386c6e46c558dcbd7a3421958d0ba2bf:Assets/Scenes/Main Menu.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
