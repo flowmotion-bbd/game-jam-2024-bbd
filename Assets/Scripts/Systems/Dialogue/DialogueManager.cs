@@ -29,6 +29,11 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue, Action dialogueCallback)
     {
+        if (dialogue == null)
+        {
+            dialogue = new Dialogue();
+        }
+
         animator.SetBool("IsOpen", true);
 
         sentences.Clear();

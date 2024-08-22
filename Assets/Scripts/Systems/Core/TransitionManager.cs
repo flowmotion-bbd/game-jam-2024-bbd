@@ -16,6 +16,12 @@ public class TransitionManager : MonoBehaviour
 
     public static TransitionManager Instance { get; private set; }
 
+    public bool Transitioning
+    {
+        get { return transitioning; }
+        set { transitioning = value; }
+    }
+
     void Awake()
     {
         if (Instance == null)
@@ -41,6 +47,13 @@ public class TransitionManager : MonoBehaviour
     {
         animator.SetBool("IsTransitioning", false);
         tranitionPanel.SetActive(false);
+        transitioning = false;
+
+        MinigameManager minigameManager = FindAnyObjectByType<MinigameManager>();
+        if (minigameManager != null)
+        {
+            minigameManager.StartMinigameDialogue();
+        }
     }
 
     IEnumerator TransitionText()

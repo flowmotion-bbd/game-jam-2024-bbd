@@ -21,6 +21,7 @@ public class LevelUIManager : MonoBehaviour
 
         HideEndLevelScreen();
     }
+
     public void ShowEndLevelScreen()
     {
         endLevelScreen.SetActive(true);

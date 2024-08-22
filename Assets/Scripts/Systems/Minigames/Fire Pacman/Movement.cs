@@ -14,6 +14,8 @@ public class Movement : MonoBehaviour
     public LayerMask obstacleLayer;
     public float speedMultiplier = 1.0f;
 
+    private FirewallMinigameManager firewallMinigameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,8 @@ public class Movement : MonoBehaviour
         this.nextDirection = this.nextDirection;
         this.rigidbody.isKinematic = false;
         this.enabled = true;
+        firewallMinigameManager = FindAnyObjectByType<FirewallMinigameManager>();
+
     }
 
     private void Awake()
@@ -39,9 +43,12 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 position = this.rigidbody.position;
-        Vector2 translation = this.direction * this.speed * this.speedMultiplier * Time.fixedDeltaTime;
-        this.rigidbody.MovePosition(position + translation);
+        if (firewallMinigameManager.MinigameInProgess)
+        {
+            Vector2 position = this.rigidbody.position;
+            Vector2 translation = this.direction * this.speed * this.speedMultiplier * Time.fixedDeltaTime;
+            this.rigidbody.MovePosition(position + translation);
+        }
     }
 
     public void SetDirection(Vector2 direction)

@@ -11,7 +11,6 @@ public class Board : MinigameManager
         KeyCode.Y, KeyCode.Z,
     };
 
-    private int score = 0;
     private static readonly int MAX_SCORE = 20;
     private static readonly int PER_ROW_SCORE = 5;
 
@@ -37,7 +36,6 @@ public class Board : MinigameManager
     public TileStyle IncorrectStyle = new(DARK_GREY, DARK_GREY);
 
     [Header("UI")]
-    public GameObject ReturnButton;
     public GameObject FeedbackBox;
     public TextMeshProUGUI HintText;
 
@@ -64,43 +62,42 @@ public class Board : MinigameManager
         hint = solutionHints[1];
     }
 
-    private void Update()
+    private new void Update()
     {
-        Row currentRow = rows[rowIndex];
+        base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (minigameInProgress)
         {
-            columnIndex = Mathf.Max(columnIndex - 1, 0);
-            currentRow.Tiles[columnIndex].ClearLetter();
-            currentRow.Tiles[columnIndex].Style = EmptyStyle;
-            ToggleFeedback();
-        }
-        else if (columnIndex >= currentRow.Tiles.Length)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
+            Row currentRow = rows[rowIndex];
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                SubmitRow(currentRow);
+                columnIndex = Mathf.Max(columnIndex - 1, 0);
+                currentRow.Tiles[columnIndex].ClearLetter();
+                currentRow.Tiles[columnIndex].Style = EmptyStyle;
+                ToggleFeedback();
             }
-        }
-        else
-        {
-            for (int i = 0; i < KEYS.Length; i++)
+            else if (columnIndex >= currentRow.Tiles.Length)
             {
-                if (Input.GetKeyDown(KEYS[i]))
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    currentRow.Tiles[columnIndex].Letter = (char)KEYS[i];
-                    currentRow.Tiles[columnIndex].Style = OccupiedStyle;
-                    columnIndex++;
-                    break;
+                    SubmitRow(currentRow);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < KEYS.Length; i++)
+                {
+                    if (Input.GetKeyDown(KEYS[i]))
+                    {
+                        currentRow.Tiles[columnIndex].Letter = (char)KEYS[i];
+                        currentRow.Tiles[columnIndex].Style = OccupiedStyle;
+                        columnIndex++;
+                        break;
+                    }
                 }
             }
         }
-    }
-
-    public void ReturnButtonMethod()
-    {
-        ClearState();
-        EndMinigame(score);
     }
 
     private void SubmitRow(Row row)
@@ -155,10 +152,8 @@ public class Board : MinigameManager
 
         if (HasWon(row))
         {
-            ToggleFeedback("YOU WON!");
-            minigameWon = true;
-            score = MAX_SCORE - (rows.Length - rowIndex) * PER_ROW_SCORE;
-            enabled = false;
+            scoreAchieved = MAX_SCORE - (rows.Length - rowIndex) * PER_ROW_SCORE;
+            GameOver(true);
             return;
         }
 
@@ -167,10 +162,8 @@ public class Board : MinigameManager
 
         if (rowIndex >= rows.Length)
         {
-            ToggleFeedback("YOU LOST!");
-            score = MAX_SCORE;
-            minigameWon = false;
-            enabled = false;
+            scoreAchieved = MAX_SCORE;
+            GameOver(false);
         }
     }
 
@@ -224,22 +217,12 @@ public class Board : MinigameManager
         rowIndex = 0;
         columnIndex = 0;
 
-        ReturnButton.SetActive(false);
         ToggleFeedback();
-    }
-
-    private void OnEnable()
-    {
-        ReturnButton.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        ReturnButton.SetActive(true);
     }
 
     protected override void StartMinigame()
     {
+        minigameInProgress = true;
         HintText.text = "HINT: " + hint;
         HintText.gameObject.SetActive(true);
 

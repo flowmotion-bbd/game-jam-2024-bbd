@@ -8,8 +8,7 @@ public class GraphState : MonoBehaviour
 
     private Graph graph = new Graph();
     [SerializeField] private List<DataPath> dataPaths = new List<DataPath>();
-
-    List<DataPath> origDataPaths = new List<DataPath>();
+    private List<DataPath> origDataPaths = new List<DataPath>();
 
     public Graph Graph
     {
@@ -43,7 +42,8 @@ public class GraphState : MonoBehaviour
             graph.AddEdge(edgeState);
         }
 
-        foreach(DataPath dataPath in dataPaths)
+
+        foreach (DataPath dataPath in dataPaths)
         {
             origDataPaths.Add(new DataPath(dataPath));
         }
@@ -102,6 +102,21 @@ public class GraphState : MonoBehaviour
         foreach (NodeState nodeState in graph.Nodes)
         {
             nodeState.ResetState();
+        }
+
+        foreach (DataPath dataPath in dataPaths)
+        {
+            foreach (NodeState nodeState in dataPath.Path)
+            {
+                nodeState.Node.Compromised = true;
+                nodeState.Node.Visible = true;
+            }
+        }
+
+        foreach (NodeState nodeState in graph.EndNodes)
+        {
+            nodeState.Node.Compromised = true;
+            nodeState.Node.Visible = true;
         }
     }
 

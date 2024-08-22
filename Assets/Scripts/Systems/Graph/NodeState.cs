@@ -18,6 +18,7 @@ public class NodeState : MonoBehaviour
     public void ResetState()
     {
         node.Visible = false;
+        node.Compromised = false;
         node.CompromisationTime = node.InitCompromisationTime;
     }
 }

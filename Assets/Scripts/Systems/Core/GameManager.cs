@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
 
     private TransitionManager transitionManager;
 
-    private string minigameSceneName = string.Empty;
-
     void Awake()
     {
         if (Instance == null)

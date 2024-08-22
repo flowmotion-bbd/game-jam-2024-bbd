@@ -92,39 +92,26 @@ public class LevelManager : MonoBehaviour
     {
         if (!isInMinigame)
         {
-            if (LevelFinished())
-            {
-                StopTimer();
-                FindFirstObjectByType<LevelUIManager>().ShowEndLevelScreen();
-            }
-
-            for (int i = 0; i <= 9; i++)
-            {
-                KeyCode mainKey = KeyCode.Alpha0 + i;   // Main number keys (0-9)
-                KeyCode numpadKey = KeyCode.Keypad0 + i; // Numeric keypad keys (0-9)
-
-                if (Input.GetKeyDown(mainKey) || Input.GetKeyDown(numpadKey))
-                {
-                    currentDataPathIndex = i - 1;
-                }
-            }
-
             if (isTiming)
             {
                 elapsedTime += Time.deltaTime;
                 levelUIManager.UpdateTimerDisplay(elapsedTime);
-            }
-            else if (countDownTime < 0f)
-            {
-                countDownTime = 3f;
-                isCountingDown = false;
-                levelUIManager.HideCountdown();
-                StartTimer();
-            }
-            else if (isCountingDown)
-            {
-                countDownTime -= Time.deltaTime;
-                levelUIManager.UpdateCountdownDisplay(countDownTime);
+                if (LevelFinished())
+                {
+                    StopTimer();
+                    levelUIManager.ShowEndLevelScreen();
+                }
+
+                for (int i = 0; i <= 9; i++)
+                {
+                    KeyCode mainKey = KeyCode.Alpha0 + i;   // Main number keys (0-9)
+                    KeyCode numpadKey = KeyCode.Keypad0 + i; // Numeric keypad keys (0-9)
+
+                    if (Input.GetKeyDown(mainKey) || Input.GetKeyDown(numpadKey))
+                    {
+                        currentDataPathIndex = i - 1;
+                    }
+                }
             }
 
             graphRenderer.UpdateGraph(currentDataPathIndex);
@@ -138,14 +125,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Coroutine that runs the timer
     IEnumerator CountDown()
     {
         countDownTime = 3f;
         isCountingDown = true;
         levelUIManager.ShowCountdown();
 
-        // Loop until 5 seconds have elapsed
         while (countDownTime > 0f)
         {
             countDownTime -= Time.deltaTime;

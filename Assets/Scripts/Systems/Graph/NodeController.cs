@@ -27,7 +27,6 @@ public abstract class NodeController : MonoBehaviour
                 yield break;
             }
 
-            Debug.Log("Compromising");
             nodeState.Node.CompromisationTime  -= Time.deltaTime;
             nodeRenderer.SetCompromiseRadial(nodeState.Node.CompromisationTime / nodeState.Node.InitCompromisationTime);
 
@@ -40,6 +39,9 @@ public abstract class NodeController : MonoBehaviour
     
     public void CompromiseNode(DataPath dataPath)
     {
-        StartCoroutine(StartCompromise(dataPath));
+        if (!nodeState.Node.Compromised)
+        {
+            StartCoroutine(StartCompromise(dataPath));
+        }
     }
 }
