@@ -3,14 +3,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class Tile : MonoBehaviour, IPointerClickHandler
+public class PatternMatchTile : MonoBehaviour, IPointerClickHandler
 {
-    public event Action<Tile> OnTileClicked;
+    public event Action<PatternMatchTile> OnTileClicked;
 
     private Image fill;
     private Outline outline;
-    private TileStyle style;
-    private TileStyle inactiveStyle;
+    private PatternMatchTileStyle style;
+    private PatternMatchTileStyle inactiveStyle;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         outline = GetComponent<Outline>();
     }
 
-    public TileStyle Style
+    public PatternMatchTileStyle Style
     {
         get => style;
         set
@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public TileStyle InactiveStyle { get => inactiveStyle; set => inactiveStyle = value; }
+    public PatternMatchTileStyle InactiveStyle { get => inactiveStyle; set => inactiveStyle = value; }
 
     public void Hide()
     {

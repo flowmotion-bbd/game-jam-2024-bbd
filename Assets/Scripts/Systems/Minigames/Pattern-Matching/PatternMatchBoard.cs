@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 
-public class Board : MonoBehaviour
+public class PatternMatchBoard : MinigameManager
 {
     private static readonly int NUM_ROWS = 4;
 
@@ -21,17 +20,17 @@ public class Board : MonoBehaviour
     private static readonly Color PAIR_EIGHT = new Color32(255, 255, 255, 255);
 
     [Header("Styles")]
-    public TileStyle InactiveStyle = new(BACKGROUND, DARK_GREY);
-    public TileStyle[] PairStyles = new TileStyle[]
+    public PatternMatchTileStyle InactiveStyle = new(BACKGROUND, DARK_GREY);
+    public PatternMatchTileStyle[] PairStyles = new PatternMatchTileStyle[]
     {
-        new TileStyle(PAIR_ONE, PAIR_ONE),
-        new TileStyle(PAIR_TWO, PAIR_TWO),
-        new TileStyle(PAIR_THREE, PAIR_THREE),
-        new TileStyle(PAIR_FOUR, PAIR_FOUR),
-        new TileStyle(PAIR_FIVE, PAIR_FIVE),
-        new TileStyle(PAIR_SIX, PAIR_SIX),
-        new TileStyle(PAIR_SEVEN, PAIR_SEVEN),
-        new TileStyle(PAIR_EIGHT, PAIR_EIGHT),
+        new PatternMatchTileStyle(PAIR_ONE, PAIR_ONE),
+        new PatternMatchTileStyle(PAIR_TWO, PAIR_TWO),
+        new PatternMatchTileStyle(PAIR_THREE, PAIR_THREE),
+        new PatternMatchTileStyle(PAIR_FOUR, PAIR_FOUR),
+        new PatternMatchTileStyle(PAIR_FIVE, PAIR_FIVE),
+        new PatternMatchTileStyle(PAIR_SIX, PAIR_SIX),
+        new PatternMatchTileStyle(PAIR_SEVEN, PAIR_SEVEN),
+        new PatternMatchTileStyle(PAIR_EIGHT, PAIR_EIGHT),
     };
 
     [Header("Config")]
@@ -41,17 +40,15 @@ public class Board : MonoBehaviour
     public int numCols = 4;
     public float initialLookingTime = 3.0f;
     public GameObject ReferenceTile;
-    public GameObject ReturnButton;
     public GameObject FeedbackBox;
     
     private TextMeshProUGUI feedbackBoxText;
     private GridLayoutGroup gridLayoutGroup;
 
-    private Tile prevClickedTile;
-    private Tile currClickedTile;
+    private PatternMatchTile prevClickedTile;
+    private PatternMatchTile currClickedTile;
     private bool allowClicks = false;
     private int correctPairs = 0;
-    private int score = 0;
     
     private void Awake()
     {
@@ -59,22 +56,17 @@ public class Board : MonoBehaviour
         gridLayoutGroup = gameObject.GetComponent<GridLayoutGroup>();
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         gridLayoutGroup.constraintCount = NUM_ROWS;
         GenerateGrid();
-        StartCoroutine(HideTilesDelayed(initialLookingTime));
-        toggleFeedback("SCORE: " + score);
-
-        enabled = true;
+        HideAllTiles();
+        toggleFeedback("SCORE: " + scoreAchieved);
     }
 
-    private void Update()
-    {
-
-    }
-
-    private bool hasWon()
+    private bool HasWon()
     {
         int targetCorrectPairs = (numCols * NUM_ROWS)/2;
         if (correctPairs == targetCorrectPairs)
@@ -82,22 +74,19 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    private void won()
+    private void Won()
     {
         StopAllCoroutines();
 
-        toggleFeedback("YOU WON!");
         correctPairs = 0;
         allowClicks = false;
 
-        Tile[] tiles = FindObjectsByType<Tile>(FindObjectsSortMode.None);
-        foreach (Tile tile in tiles)
-        {
-            tile.enabled = true;
-            tile.Show();
-        }
+        ShowAllTiles();
 
         enabled = false;
+
+        scoreAchieved = scoreAchieved;
+        GameOver(true);
     }
 
     private void toggleFeedback(string feedback = "")
@@ -113,7 +102,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void TileClicked(Tile tile)
+    public void TileClicked(PatternMatchTile tile)
     {
         if (!allowClicks) return;
 
@@ -125,7 +114,7 @@ public class Board : MonoBehaviour
         {
             if (prevClickedTile.Style == currClickedTile.Style && prevClickedTile != currClickedTile)
             {
-                score += scoreBonus;
+                scoreAchieved += scoreBonus;
 
                 correctPairs++;
                 prevClickedTile.enabled = false;
@@ -133,25 +122,27 @@ public class Board : MonoBehaviour
             }
             else
             {
-                score += scorePenalty;
+                scoreAchieved += scorePenalty;
             }
 
             prevClickedTile = null;
             currClickedTile = null;
             StartCoroutine(HideTilesDelayed(0.2f));
 
-            score = Mathf.Clamp(score, -maxScore, maxScore);
-            toggleFeedback("SCORE: " + score);
+            scoreAchieved = Mathf.Clamp(scoreAchieved, -maxScore, maxScore);
+            toggleFeedback("SCORE: " + scoreAchieved);
         }
 
-        if (hasWon())
-            won();
+        if (HasWon())
+        {
+            Won();
+        }
     }
 
     private void GenerateGrid()
     {
         //Get right num styles for grid size considering num imput styles
-        List<TileStyle> allStyles = new List<TileStyle>(PairStyles);
+        List<PatternMatchTileStyle> allStyles = new List<PatternMatchTileStyle>(PairStyles);
         int neededStyles = (numCols * NUM_ROWS) / 2;
 
         while (allStyles.Count > neededStyles) //Too many styles
@@ -160,11 +151,11 @@ public class Board : MonoBehaviour
             allStyles.RemoveAt(randomStyleIndex);
         }
 
-        List<TileStyle> addStyles = new List<TileStyle>(PairStyles);
+        List<PatternMatchTileStyle> addStyles = new List<PatternMatchTileStyle>(PairStyles);
         while (allStyles.Count < neededStyles) //Too few styles
         {
             if (addStyles.Count == 0)
-                addStyles = new List<TileStyle>(PairStyles);
+                addStyles = new List<PatternMatchTileStyle>(PairStyles);
 
             int randomStyleIndex = Random.Range(0, addStyles.Count);
             allStyles.Add(addStyles[randomStyleIndex]);
@@ -180,7 +171,7 @@ public class Board : MonoBehaviour
             for (int col = 0; col < numCols; col++)
             {
                 GameObject tileObj = Instantiate(ReferenceTile, transform);                    
-                Tile tile = tileObj.GetComponent<Tile>();
+                PatternMatchTile tile = tileObj.GetComponent<PatternMatchTile>();
 
                 int randomStyleIndex = Random.Range(0, allStyles.Count);
                 tile.Style = allStyles[randomStyleIndex];
@@ -200,26 +191,33 @@ public class Board : MonoBehaviour
 
     public void HideAllTiles()
     {
-        Tile[] tiles = FindObjectsByType<Tile>(FindObjectsSortMode.None);
-        foreach (Tile tile in tiles)
+        PatternMatchTile[] tiles = FindObjectsByType<PatternMatchTile>(FindObjectsSortMode.None);
+        foreach (PatternMatchTile tile in tiles)
         {
             tile.Hide();
+        }
+    }
+
+    public void ShowAllTiles()
+    {
+        PatternMatchTile[] tiles = FindObjectsByType<PatternMatchTile>(FindObjectsSortMode.None);
+        foreach (PatternMatchTile tile in tiles)
+        {
+            tile.enabled = true;
+            tile.Show();
         }
     }
 
     public void ReturnButtonMethod()
     {
         Debug.Log("Go back to game screen");
-        Debug.Log("Score is " +score);
+        Debug.Log("Score is " +scoreAchieved);
     }
 
-    private void OnEnable()
+    protected override void StartMinigame()
     {
-        ReturnButton.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        ReturnButton.SetActive(true);
+        ShowAllTiles();
+        StartCoroutine(HideTilesDelayed(initialLookingTime));
+        enabled = true;
     }
 }

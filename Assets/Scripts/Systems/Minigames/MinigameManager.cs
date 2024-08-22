@@ -35,6 +35,11 @@ public abstract class MinigameManager : MonoBehaviour
 
         wonPanel.SetActive(false);
         lostPanel.SetActive(false);
+
+        if (TransitionManager.Instance == null || !TransitionManager.Instance.Transitioning)
+        {
+            StartMinigameDialogue();
+        }
     }
 
     public void StartMinigameDialogue()
@@ -69,6 +74,7 @@ public abstract class MinigameManager : MonoBehaviour
     {
         if (minigameOver)
         {
+            Debug.Log("GAME IS OVER");
             if (Input.anyKeyDown)
             {
                 EndMinigame();

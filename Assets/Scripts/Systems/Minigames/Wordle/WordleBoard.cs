@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Board : MinigameManager
+public class WordleBoard : MinigameManager
 {
     private static readonly KeyCode[] KEYS = new KeyCode[] {
         KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F,
@@ -14,7 +14,7 @@ public class Board : MinigameManager
     private static readonly int MAX_SCORE = 20;
     private static readonly int PER_ROW_SCORE = 5;
 
-    private Row[] rows;
+    private WordleRow[] rows;
     private int rowIndex;
     private int columnIndex;
 
@@ -29,11 +29,11 @@ public class Board : MinigameManager
     private static readonly Color BACKGROUND = new Color32(18, 18, 19, 255);
 
     [Header("Styles")]
-    public TileStyle EmptyStyle = new(BACKGROUND, DARK_GREY);
-    public TileStyle OccupiedStyle = new(BACKGROUND, LIGHT_GREY);
-    public TileStyle CorrectStyle = new(GREEN, GREEN);
-    public TileStyle WrongSpotStyle = new(YELLOW, YELLOW);
-    public TileStyle IncorrectStyle = new(DARK_GREY, DARK_GREY);
+    public WordleTileStyle EmptyStyle = new(BACKGROUND, DARK_GREY);
+    public WordleTileStyle OccupiedStyle = new(BACKGROUND, LIGHT_GREY);
+    public WordleTileStyle CorrectStyle = new(GREEN, GREEN);
+    public WordleTileStyle WrongSpotStyle = new(YELLOW, YELLOW);
+    public WordleTileStyle IncorrectStyle = new(DARK_GREY, DARK_GREY);
 
     [Header("UI")]
     public GameObject FeedbackBox;
@@ -43,7 +43,7 @@ public class Board : MinigameManager
 
     private void Awake()
     {
-        rows = GetComponentsInChildren<Row>();
+        rows = GetComponentsInChildren<WordleRow>();
         feedbackBoxText = FeedbackBox.GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -68,7 +68,7 @@ public class Board : MinigameManager
 
         if (minigameInProgress)
         {
-            Row currentRow = rows[rowIndex];
+            WordleRow currentRow = rows[rowIndex];
 
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
@@ -100,7 +100,7 @@ public class Board : MinigameManager
         }
     }
 
-    private void SubmitRow(Row row)
+    private void SubmitRow(WordleRow row)
     {
         if (!IsValidWord(row.GetWord()))
         {
@@ -113,7 +113,7 @@ public class Board : MinigameManager
         // Check correct/incorrect letters first
         for (int i = 0; i < row.Tiles.Length; i++)
         {
-            Tile tile = row.Tiles[i];
+            WordleTile tile = row.Tiles[i];
 
             if (tile.Letter == solution[i])
             {
@@ -131,7 +131,7 @@ public class Board : MinigameManager
         // Check wrong spots after
         for (int i = 0; i < row.Tiles.Length; i++)
         {
-            Tile tile = row.Tiles[i];
+            WordleTile tile = row.Tiles[i];
 
             if (tile.Style != CorrectStyle && tile.Style != IncorrectStyle)
             {
@@ -192,7 +192,7 @@ public class Board : MinigameManager
         return false;
     }
 
-    private bool HasWon(Row row)
+    private bool HasWon(WordleRow row)
     {
         for (int tileIndex = 0; tileIndex < row.Tiles.Length; tileIndex++)
         {
