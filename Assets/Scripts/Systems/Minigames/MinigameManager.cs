@@ -74,7 +74,6 @@ public abstract class MinigameManager : MonoBehaviour
     {
         if (minigameOver)
         {
-            Debug.Log("GAME IS OVER");
             if (Input.anyKeyDown)
             {
                 EndMinigame();

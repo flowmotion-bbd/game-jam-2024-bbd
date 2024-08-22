@@ -66,6 +66,11 @@ public class PatternMatchBoard : MinigameManager
         toggleFeedback("SCORE: " + scoreAchieved);
     }
 
+    private new void Update()
+    {
+        base.Update();
+    }
+
     private bool HasWon()
     {
         int targetCorrectPairs = (numCols * NUM_ROWS)/2;
@@ -83,9 +88,6 @@ public class PatternMatchBoard : MinigameManager
 
         ShowAllTiles();
 
-        enabled = false;
-
-        scoreAchieved = scoreAchieved;
         GameOver(true);
     }
 
@@ -218,6 +220,5 @@ public class PatternMatchBoard : MinigameManager
     {
         ShowAllTiles();
         StartCoroutine(HideTilesDelayed(initialLookingTime));
-        enabled = true;
     }
 }

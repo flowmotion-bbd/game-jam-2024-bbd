@@ -516,10 +516,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8493308503490167915, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
-      propertyPath: m_SortingOrder
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 8835559765723847399, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
       propertyPath: m_Name
       value: MinigameCanvas

@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 150836560290929849, guid: e847d1c68fb52374fb342873e1919959, type: 3}
+      propertyPath: m_text
+      value: Successfully Connected to 10.102.32.10
+      objectReference: {fileID: 0}
     - target: {fileID: 1298860335974379082, guid: e847d1c68fb52374fb342873e1919959, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -207,9 +211,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2832272052067134524, guid: e847d1c68fb52374fb342873e1919959, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3784588383548478838, guid: e847d1c68fb52374fb342873e1919959, type: 3}
       propertyPath: m_Name
       value: TransitionCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207188456734548861, guid: e847d1c68fb52374fb342873e1919959, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 950
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207188456734548861, guid: e847d1c68fb52374fb342873e1919959, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
