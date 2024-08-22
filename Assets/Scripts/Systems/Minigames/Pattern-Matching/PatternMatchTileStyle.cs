@@ -2,14 +2,14 @@
 using UnityEngine;
 
 [System.Serializable]
-public class TileStyle
+public class PatternMatchTileStyle
 {
     [SerializeField]
     private Color fillColor;
     [SerializeField]
     private Color outlineColor;
     
-    public TileStyle(Color fillColor, Color outlineColor)
+    public PatternMatchTileStyle(Color fillColor, Color outlineColor)
     {
         this.fillColor = fillColor;
         this.outlineColor = outlineColor;

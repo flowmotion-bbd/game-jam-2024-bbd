@@ -2,13 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tile : MonoBehaviour
+public class WordleTile : MonoBehaviour
 {
     private Image fill;
     private Outline outline;
     private TextMeshProUGUI text;
     private char letter;
-    private TileStyle style;
+    private WordleTileStyle style;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public TileStyle Style
+    public WordleTileStyle Style
     {
         get => style;
         set
