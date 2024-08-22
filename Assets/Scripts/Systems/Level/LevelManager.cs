@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
 
     void StartCountDown()
     {
-        StartCoroutine("CountDown");
+        StartCoroutine(CountDown());
     }
 
     public void HideLevelObjects()
@@ -133,7 +133,7 @@ public class LevelManager : MonoBehaviour
 
         while (countDownTime > 0f)
         {
-            countDownTime -= Time.deltaTime;
+            countDownTime -= 2*Time.deltaTime;
 
             if (countDownTime < 0)
             {
