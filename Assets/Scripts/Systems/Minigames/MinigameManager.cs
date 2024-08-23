@@ -11,6 +11,8 @@ public abstract class MinigameManager : MonoBehaviour
     protected float scoreAchieved;
 
     [SerializeField] private Dialogue startMinigameDialogue;
+
+    [SerializeField] private Dialogue minigameWonDialogue;
     [SerializeField] private Dialogue minigameLostDialogue;
 
     public bool MinigameInProgess
@@ -40,7 +42,7 @@ public abstract class MinigameManager : MonoBehaviour
 
     protected void EndMinigame()
     {
-        gameManager.MinigameEnded(minigameWon, scoreAchieved, minigameWon ? null : minigameLostDialogue);
+        gameManager.MinigameEnded(minigameWon, scoreAchieved, minigameWon ? minigameWonDialogue : minigameLostDialogue);
     }
 
     public void GameOver(bool hasWon)
@@ -55,11 +57,11 @@ public abstract class MinigameManager : MonoBehaviour
 
         if (hasWon)
         {
-            MinigameUIManager.Instance.ShowWinScreen("You scored " + scoreAchieved + " seconds");
+            MinigameUIManager.Instance.ShowWinScreen("You scored " + scoreAchieved.ToString("F3") + " seconds");
         }
         else
         {
-            MinigameUIManager.Instance.ShowLoseScreen("You scored " + scoreAchieved + " seconds");
+            MinigameUIManager.Instance.ShowLoseScreen("You scored " + scoreAchieved.ToString("F3") + " seconds");
         }
 
         StartCoroutine(SetMinigameOver());
@@ -78,7 +80,7 @@ public abstract class MinigameManager : MonoBehaviour
 
     IEnumerator SetMinigameOver()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         minigameOver = true;
     }
 
