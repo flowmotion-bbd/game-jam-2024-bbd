@@ -28,6 +28,7 @@ public class SneakMinigameManager : MinigameManager
         {
             timeTaken += Time.deltaTime;
             time.text = "Time Taken: " + timeTaken.ToString("F2");
+            scoreAchieved = timeTaken;
         }
     }
 }
