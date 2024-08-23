@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NodeRenderer : MonoBehaviour
 {
+    [SerializeField] TMP_Text selectKeyText = null;
     [SerializeField] private SpriteRenderer selectedSpriteRenderer;
     [SerializeField] private Image compromiseRadialImage;
 
@@ -25,5 +27,11 @@ public class NodeRenderer : MonoBehaviour
         }
 
         compromiseRadialImage.fillAmount = radialFillAmount;
+    }
+
+    public void SetSelectKeyText(int index)
+    {
+        selectKeyText.gameObject.SetActive(true);
+        selectKeyText.text = index.ToString();
     }
 }

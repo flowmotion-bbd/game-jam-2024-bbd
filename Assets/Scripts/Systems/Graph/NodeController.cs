@@ -3,6 +3,7 @@ using System.Collections;
 
 public abstract class NodeController : MonoBehaviour
 {
+    [Header("Sleep Is For The Weak")]
     public NodeState nodeState;
     public LevelManager levelManager;
     public NodeRenderer nodeRenderer;
