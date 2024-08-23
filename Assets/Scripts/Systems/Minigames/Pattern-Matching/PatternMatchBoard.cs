@@ -41,6 +41,7 @@ public class PatternMatchBoard : MinigameManager
     public float initialLookingTime = 3.0f;
     public GameObject ReferenceTile;
     public GameObject FeedbackBox;
+    public TimerSlider timerSlider;
     
     private TextMeshProUGUI feedbackBoxText;
     private GridLayoutGroup gridLayoutGroup;
@@ -220,5 +221,6 @@ public class PatternMatchBoard : MinigameManager
     {
         ShowAllTiles();
         StartCoroutine(HideTilesDelayed(initialLookingTime));
+        timerSlider.StartTimerSliderTransition(initialLookingTime);
     }
 }

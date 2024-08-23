@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
 
     private TransitionManager transitionManager;
 
+    public string DefaultSceneName
+    {
+        get { return defaultSceneName; }
+        set { defaultSceneName = value; }
+    }
+
     void Awake()
     {
         if (Instance == null)
@@ -55,5 +61,11 @@ public class GameManager : MonoBehaviour
     public void UnloadMinigame(string minigameSceneName)
     {
         SceneManager.UnloadSceneAsync(minigameSceneName);
+    }
+
+    public bool IsScenePausible()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        return currentScene.name != defaultSceneName;
     }
 }
