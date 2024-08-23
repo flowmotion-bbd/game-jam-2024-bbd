@@ -1,24 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class Sneaker : MonoBehaviour
 {
+    private SneakMinigameManager sneakMinigameManager;
+
     public float dimTime = 10.0f;
     public float undimTime = 3.0f;
     public bool dim = false;
-    public Light2D light;
+    private Light2D playerLight;
+
+    private float maxLightRadius;
+
     private void Awake()
     {
-        light = GetComponent<Light2D>();
+        playerLight = GetComponent<Light2D>();
+        sneakMinigameManager = FindAnyObjectByType<SneakMinigameManager>();
+        maxLightRadius = playerLight.pointLightOuterRadius;
         Invoke("DimLight", dimTime);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
-            FindObjectOfType<SneakMinigameManager>().GameOver(false);
+            sneakMinigameManager.GameOver(false);
         }
     }
 
@@ -26,18 +32,18 @@ public class Sneaker : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Finish"))
         {
-            FindObjectOfType<SneakMinigameManager>().GameOver(true);
+            sneakMinigameManager.GameOver(true);
         }
     }
 
     private void FixedUpdate()
     {
-        if (dim && light.pointLightOuterRadius > 1)
+        if (dim && playerLight.pointLightOuterRadius > 1)
         {
-            light.pointLightOuterRadius -= 1;
-        } else if (!dim && light.pointLightOuterRadius < 200)
+            playerLight.pointLightOuterRadius -= 1;
+        } else if (!dim && playerLight.pointLightOuterRadius < maxLightRadius)
         {
-            light.pointLightOuterRadius += 1;
+            playerLight.pointLightOuterRadius += 1;
         }
     }
 

@@ -45,6 +45,11 @@ public abstract class MinigameManager : MonoBehaviour
 
     public void GameOver(bool hasWon)
     {
+        if (minigameInProgress == false || minigameOver == true)
+        {
+            return;
+        }
+
         minigameInProgress = false;
         minigameWon = hasWon;
 

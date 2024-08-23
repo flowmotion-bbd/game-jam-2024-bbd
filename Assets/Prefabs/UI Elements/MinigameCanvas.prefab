@@ -1013,7 +1013,7 @@ MonoBehaviour:
   winPanel: {fileID: 368610072648253507}
   winMessageText: {fileID: 3916464578505516775}
   losePanel: {fileID: 9155096705391429620}
-  lostMessageText: {fileID: 20559298879094463}
+  lostMessageText: {fileID: 6521157049673246245}
 --- !u!1 &9155096705391429620
 GameObject:
   m_ObjectHideFlags: 0

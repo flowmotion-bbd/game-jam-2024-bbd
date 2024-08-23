@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SMovement : MonoBehaviour
 {
-    public Rigidbody2D rigidbody { get; private set; }
+    public Rigidbody2D myRigidbody { get; private set; }
 
     public float acccelaratorFactor = 0.5f;
     public float turnFactor = 0.02f;
@@ -17,7 +17,7 @@ public class SMovement : MonoBehaviour
 
     private void Awake()
     {
-        this.rigidbody = GetComponent<Rigidbody2D>();
+        this.myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -30,26 +30,13 @@ public class SMovement : MonoBehaviour
     {
         Vector2 speedForceVector = transform.up * acccelarationInput * acccelaratorFactor;
 
-        rigidbody.AddForce(speedForceVector, ForceMode2D.Force);
+        myRigidbody.AddForce(speedForceVector, ForceMode2D.Force);
     }
 
     private void ApplyDirectionBall()
     {
         Vector2 speedForceVector = transform.right * steeringInput * acccelaratorFactor;
-        rigidbody.AddForce(speedForceVector, ForceMode2D.Force);
-    }
-
-    private void ApplySpeedCar()
-    {
-        Vector2 speedForceVector = transform.up * acccelarationInput * acccelaratorFactor;
-
-        rigidbody.AddForce(speedForceVector, ForceMode2D.Force);
-    }
-
-    private void ApplyDirectionCar()
-    {
-        rotationAngle -= steeringInput * turnFactor;
-        rigidbody.MoveRotation(rotationAngle);
+        myRigidbody.AddForce(speedForceVector, ForceMode2D.Force);
     }
 
     public void SetInputVector(Vector2 inputVector) 
