@@ -18,10 +18,19 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Pattern-Matching.unity
     guid: 617b5564feca5ee4989fcaa82c1dfa8f
   - enabled: 1
+    path: Assets/Scenes/Minigames/Router-Minigame.unity
+    guid: f9718b057c69cd74ba1c2c737c94cbd6
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Sneak.unity
+    guid: 220fe311454109c4da9057a32a24584a
+  - enabled: 1
     path: Assets/Scenes/Levels/Level 1.unity
     guid: 7fda392d2300fc94389043003fa77242
   - enabled: 1
     path: Assets/Scenes/Levels/Level 2.unity
     guid: 17754e13dd6947b48bef35e96102195b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 3.unity
+    guid: a28e63c6916f4c14e89a22f867e8ac51
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
