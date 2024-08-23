@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &29004915 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9155096705391429620, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
-  m_PrefabInstance: {fileID: 450855294}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &450855294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,28 +216,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
---- !u!114 &450855295 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6521157049673246245, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
-  m_PrefabInstance: {fileID: 450855294}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &450855296 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3916464578505516775, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
-  m_PrefabInstance: {fileID: 450855294}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &489788457
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,22 +489,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &525174969 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 368610072648253507, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
-  m_PrefabInstance: {fileID: 450855294}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &554818953 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 20559298879094463, guid: fcf4587425b15fe4c9db5943876f90d2, type: 3}
-  m_PrefabInstance: {fileID: 450855294}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &672323042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1252,62 +1209,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 489788459}
     - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: wonPanel
-      value: 
-      objectReference: {fileID: 525174969}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: lostPanel
-      value: 
-      objectReference: {fileID: 29004915}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
       propertyPath: FeedbackBox
       value: 
       objectReference: {fileID: 1976245771}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: ReturnButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: winScoreText
-      value: 
-      objectReference: {fileID: 450855296}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: lossScoreText
-      value: 
-      objectReference: {fileID: 554818953}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: lostScoreText
-      value: 
-      objectReference: {fileID: 450855295}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: endMinigameDialogue.sentences.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: minigameWonDialogue.sentences.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: minigameLostDialogue.sentences.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: startMinigameDialogue.sentences.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: 'minigameWonDialogue.sentences.Array.data[0]'
-      value: Well done you, some time has been deducted for doing such a good job
-        ;)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: 'minigameLostDialogue.sentences.Array.data[0]'
-      value: You didn't crack the password, better luck next time!
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241907728220300475, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: 'startMinigameDialogue.sentences.Array.data[0]'
-      value: It's wordle, but with a hint :)
-      objectReference: {fileID: 0}
     - target: {fileID: 3135841535301002076, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1704,22 +1608,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: winPanel
-      value: 
-      objectReference: {fileID: 525174969}
-    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: losePanel
-      value: 
-      objectReference: {fileID: 29004915}
-    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: winMessageText
-      value: 
-      objectReference: {fileID: 450855296}
-    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
-      propertyPath: lostMessageText
-      value: 
-      objectReference: {fileID: 450855295}
     - target: {fileID: 7558494830803327370, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

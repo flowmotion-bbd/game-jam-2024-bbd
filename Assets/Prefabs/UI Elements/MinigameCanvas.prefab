@@ -906,6 +906,7 @@ GameObject:
   - component: {fileID: 8493308503490167915}
   - component: {fileID: 3267160122462259693}
   - component: {fileID: 4372480042135262668}
+  - component: {fileID: 3590709307906348694}
   m_Layer: 5
   m_Name: MinigameCanvas
   m_TagString: Untagged
@@ -997,6 +998,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3590709307906348694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8835559765723847399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaad86cb2e04a6046859c3096d58bd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winPanel: {fileID: 368610072648253507}
+  winMessageText: {fileID: 3916464578505516775}
+  losePanel: {fileID: 9155096705391429620}
+  lostMessageText: {fileID: 6521157049673246245}
 --- !u!1 &9155096705391429620
 GameObject:
   m_ObjectHideFlags: 0

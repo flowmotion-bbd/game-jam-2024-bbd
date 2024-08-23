@@ -640,7 +640,7 @@ MonoBehaviour:
   nodeState: {fileID: 0}
   levelManager: {fileID: 0}
   nodeRenderer: {fileID: 0}
-  minigameSceneName: 
+  minigameSceneName: Router-Minigame
 --- !u!114 &2830911301549175760
 MonoBehaviour:
   m_ObjectHideFlags: 0

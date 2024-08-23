@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public abstract class MinigameManager : MonoBehaviour
 {
@@ -44,8 +45,12 @@ public abstract class MinigameManager : MonoBehaviour
 
     public void GameOver(bool hasWon)
     {
+        if (minigameInProgress == false || minigameOver == true)
+        {
+            return;
+        }
+
         minigameInProgress = false;
-        minigameOver = true;
         minigameWon = hasWon;
 
         if (hasWon)
@@ -56,6 +61,8 @@ public abstract class MinigameManager : MonoBehaviour
         {
             MinigameUIManager.Instance.ShowLoseScreen("You scored " + scoreAchieved + " seconds");
         }
+
+        StartCoroutine(SetMinigameOver());
     }
 
     protected void Update()
@@ -67,6 +74,12 @@ public abstract class MinigameManager : MonoBehaviour
                 EndMinigame();
             }
         }
+    }
+
+    IEnumerator SetMinigameOver()
+    {
+        yield return new WaitForSeconds(3f);
+        minigameOver = true;
     }
 
     protected abstract void StartMinigame();
