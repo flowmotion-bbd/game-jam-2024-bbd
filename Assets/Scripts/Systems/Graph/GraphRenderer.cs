@@ -28,12 +28,15 @@ public class GraphRenderer : MonoBehaviour
             nodeRenderer.ToggleSelected(false, Color.clear);
         }
 
-        foreach (DataPath dataPath in graphState.DataPaths)
+        for (int i = 0; i < graphState.DataPaths.Count; i++)
         {
+            var dataPath = graphState.DataPaths[i];
+
             //dataPath.Path.First().GetComponent<NodeRenderer>().ToggleSelected(true, dataPath.Colour);
-            for (int i = 0; i < dataPath.Path.Count - 1; i++)
+            dataPath.Path.First().GetComponent<NodeRenderer>().SetSelectKeyText(i+1);
+            for (int j = 0; j < dataPath.Path.Count - 1; j++)
             {
-                EdgeState edgeState = graphState.RetrieveEdge(dataPath.Path[i], dataPath.Path[i + 1]);
+                EdgeState edgeState = graphState.RetrieveEdge(dataPath.Path[j], dataPath.Path[j + 1]);
 
                 if (edgeState != null)
                 {
@@ -49,8 +52,9 @@ public class GraphRenderer : MonoBehaviour
 
         DataPath currentDataPath = graphState.DataPaths[currentDataPathIndex];
 
-        currentDataPath.Path.First().GetComponent<NodeRenderer>().ToggleSelected(true, currentDataPath.Colour);
-        
+        var startDataNodeRenderer = currentDataPath.Path.First().GetComponent<NodeRenderer>();
+        startDataNodeRenderer.ToggleSelected(true, currentDataPath.Colour);
+
         for (int i = 0; i < currentDataPath.Path.Count - 1; i++)
         {
             EdgeState edgeState = graphState.RetrieveEdge(currentDataPath.Path[i], currentDataPath.Path[i + 1]);

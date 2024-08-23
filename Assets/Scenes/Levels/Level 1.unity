@@ -2023,15 +2023,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[0].colour.b
-      value: 0.003732546
+      value: 0.22352943
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[0].colour.g
-      value: 0.3433962
+      value: 0.9725491
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[0].colour.r
-      value: 0
+      value: 0.50980395
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[1].colour.a
@@ -2039,15 +2039,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[1].colour.b
-      value: 0.3074166
+      value: 0.9960785
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[1].colour.g
-      value: 0.10196076
+      value: 0.8235295
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[1].colour.r
-      value: 0.4627451
+      value: 0.22352943
       objectReference: {fileID: 0}
     - target: {fileID: 4312101409865522275, guid: db8ee7682ad32ad47938400f4a507ad7, type: 3}
       propertyPath: dataPaths.Array.data[0].startNode
@@ -2437,6 +2437,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2394665183847296622, guid: a79f34e0bc51c2c47bf8e02b73573089, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2660,10 +2664,6 @@ PrefabInstance:
     - target: {fileID: 8213048838992486421, guid: df6f68fe526e6304195d352056727dec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8482141989404479563, guid: df6f68fe526e6304195d352056727dec, type: 3}
-      propertyPath: endScreenTimeText
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
