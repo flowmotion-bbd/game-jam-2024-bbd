@@ -1,12 +1,9 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 
-public class CentralPivot : MonoBehaviour
+public class CentralPivot : MinigameManager
 {
     private static readonly Color COL_ONE = new Color32(220, 190, 255, 255);
     private static readonly Color COL_TWO = new Color32(60, 180, 75, 255);
@@ -35,7 +32,6 @@ public class CentralPivot : MonoBehaviour
     public GameObject ReferenceProjectile;
     public GameObject SpawnTile;
     public GameObject FeedbackBox;
-    public GameObject ReturnButton;
     public float initialSpawnInterval = 3f;
     public float spawnIntervalMultiplier = 0.9f;
     public float minSpawnInterval = 0.1f;
@@ -52,7 +48,6 @@ public class CentralPivot : MonoBehaviour
     private float refCornerAngleDeg;
     private float cornerXTrans;
     private float cornerYTrans;
-    private float score = 0;
     private int livesRemaining;
     private float speedMultiplier;
     private float spawnInterval;
@@ -68,29 +63,32 @@ public class CentralPivot : MonoBehaviour
 
     public void ProjDestroy(bool didHit, bool stylesMatched, bool shouldHaveHit)
     {
-        if (didHit && stylesMatched)
+        if (minigameInProgress)
         {
-            score += scoreBonus;
-            score = Mathf.Clamp(score, -maxScore, maxScore);
+            if (didHit && stylesMatched)
+            {
+                scoreAchieved += scoreBonus;
+                scoreAchieved = Mathf.Clamp(scoreAchieved, -maxScore, maxScore);
 
-            speedMultiplier += speedMultiplierStep;
-        }
-        else if (!didHit && !shouldHaveHit)
-        {
-            spawnInterval *= spawnIntervalMultiplier;
-            spawnInterval = Mathf.Max(minSpawnInterval, spawnInterval);
-        }
-        else
-        {
-            livesRemaining -= 1;
-        }
+                speedMultiplier += speedMultiplierStep;
+            }
+            else if (!didHit && !shouldHaveHit)
+            {
+                spawnInterval *= spawnIntervalMultiplier;
+                spawnInterval = Mathf.Max(minSpawnInterval, spawnInterval);
+            }
+            else
+            {
+                livesRemaining -= 1;
+            }
 
-        feedbackBoxText.text = "LIVES: " + livesRemaining + "\nSCORE: " + score;
+            feedbackBoxText.text = "LIVES: " + livesRemaining + "\nSCORE: " + scoreAchieved;
 
-        if (livesRemaining <= 0)
-        {
-            feedbackBoxText.text = "GAME OVER!\nSCORE: " + score;
-            enabled = false;
+            if (livesRemaining <= 0)
+            {
+                feedbackBoxText.text = "GAME OVER!\nSCORE: " + scoreAchieved;
+                GameOver(true);
+            }
         }
     }
 
@@ -100,11 +98,13 @@ public class CentralPivot : MonoBehaviour
         edgeTiles = GameObject.FindGameObjectsWithTag("EdgeTile");
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         GenerateEdgeTiles();
 
-        score = initialScore;
+        scoreAchieved = initialScore;
         spawnInterval = initialSpawnInterval;
         speedMultiplier = initialSpeedMultiplier;
         feedbackBoxText = FeedbackBox.GetComponentInChildren<TextMeshProUGUI>();
@@ -112,14 +112,12 @@ public class CentralPivot : MonoBehaviour
         refCornerAngleDeg = refCornerAngle * Mathf.Rad2Deg;
         cornerXTrans = Mathf.Cos(refCornerAngle);
         cornerYTrans = Mathf.Sin(refCornerAngle);
-        feedbackBoxText.text = "LIVES: " + livesRemaining + "\nSCORE: " + score;
-
-        StartCoroutine(SpawnProj());
+        feedbackBoxText.text = "LIVES: " + livesRemaining + "\nSCORE: " + scoreAchieved;
     }
 
     IEnumerator SpawnProj()
     {
-        while (this.enabled)
+        while (minigameInProgress)
         {
             GameObject newProj = Instantiate(ReferenceProjectile, SpawnTile.GetComponentInChildren<Transform>());
             Projectile proj = newProj.GetComponent<Projectile>();
@@ -143,14 +141,24 @@ public class CentralPivot : MonoBehaviour
             edgeTile.Style = allStyles[randomStyleIndex];
             allStyles.RemoveAt(randomStyleIndex);
         }
-    }   
+    }
 
-    private void Update()
+    private new void Update()
     {
+        base.Update();
+
         processKeyPresses();
 
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow)
-            || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))
+        if (
+            Input.GetKey(KeyCode.UpArrow) || 
+            Input.GetKey(KeyCode.LeftArrow) || 
+            Input.GetKey(KeyCode.DownArrow) || 
+            Input.GetKey(KeyCode.RightArrow) ||
+            Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.S) ||
+            Input.GetKey(KeyCode.D)
+        )
         {
             var eulerAngles = pivotArrow.eulerAngles;
             pivotArrow.rotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y, pivotAngleDeg);
@@ -159,35 +167,42 @@ public class CentralPivot : MonoBehaviour
 
     private void processKeyPresses()
     {
-        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
+        if (
+            (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow)) ||
+            (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+        )
         {
             pivotAngleDeg = refPivotAngleDeg + refCornerAngleDeg;
             targetPos = "top-right";
             xTrans = cornerXTrans;
             yTrans = cornerYTrans;
         }
-        else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
+        else if (
+            (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow)) ||
+            (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        )
         {
+            Debug.Log("HERE");
             pivotAngleDeg = refPivotAngleDeg - refCornerAngleDeg;
             targetPos = "down-right";
             xTrans = cornerXTrans;
             yTrans = -cornerYTrans;
         }
-        else if (Input.GetKey(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             pivotAngleDeg = refPivotAngleDeg + 90f;
             targetPos = "up";
             xTrans = 0f;
             yTrans = 1f;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             pivotAngleDeg = refPivotAngleDeg;
             targetPos = "right";
             xTrans = 1f;
             yTrans = 0f;
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
             pivotAngleDeg = refPivotAngleDeg - 90f;
             targetPos = "down";
@@ -196,20 +211,9 @@ public class CentralPivot : MonoBehaviour
         }
     }
 
-    public void ReturnButtonMethod()
+    protected override void StartMinigame()
     {
-        Debug.Log("Go back to game screen");
-        Debug.Log("Score is " + score);
-    }
-
-    private void OnEnable()
-    {
-        ReturnButton.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        ReturnButton.SetActive(true);
-        CancelInvoke();
+        minigameInProgress = true;
+        StartCoroutine(SpawnProj());
     }
 }

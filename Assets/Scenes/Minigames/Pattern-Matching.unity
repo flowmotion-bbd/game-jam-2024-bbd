@@ -1002,32 +1002,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4447289249155670340, guid: b7448967568a54a4881773d2f779ef2c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4626178673334844190}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7448967568a54a4881773d2f779ef2c, type: 3}
---- !u!1 &4626178673334844189 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4447289249155670340, guid: b7448967568a54a4881773d2f779ef2c, type: 3}
-  m_PrefabInstance: {fileID: 4626178673334844188}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4626178673334844190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4626178673334844189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaad86cb2e04a6046859c3096d58bd4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  winPanel: {fileID: 1537348855}
-  winMessageText: {fileID: 1537348854}
-  losePanel: {fileID: 1537348853}
-  lostMessageText: {fileID: 1537348852}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

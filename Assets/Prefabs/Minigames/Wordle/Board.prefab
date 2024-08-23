@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 264571891072507549}
   - component: {fileID: 6466553519921874909}
   - component: {fileID: 2241907728220300475}
-  - component: {fileID: 7542646046023015122}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -26,7 +25,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3181971567147056405}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -83,9 +82,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMinigameDialogue:
-    sentences: []
+    sentences:
+    - It's wordle, but with a hint :)
   minigameLostDialogue:
-    sentences: []
+    sentences:
+    - You didn't crack the password, better luck next time!
   EmptyStyle:
     fillColor: {r: 0.07058824, g: 0.07058824, b: 0.07450981, a: 1}
     outlineColor: {r: 0.22745098, g: 0.22745098, b: 0.23529412, a: 1}
@@ -103,22 +104,6 @@ MonoBehaviour:
     outlineColor: {r: 0.22745098, g: 0.22745098, b: 0.23529412, a: 1}
   FeedbackBox: {fileID: 0}
   HintText: {fileID: 0}
---- !u!114 &7542646046023015122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3181971567147056405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaad86cb2e04a6046859c3096d58bd4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  winPanel: {fileID: 0}
-  winMessageText: {fileID: 0}
-  losePanel: {fileID: 0}
-  lostMessageText: {fileID: 0}
 --- !u!1001 &160114214288624728
 PrefabInstance:
   m_ObjectHideFlags: 0
