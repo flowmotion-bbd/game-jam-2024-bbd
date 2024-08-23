@@ -1704,6 +1704,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
+      propertyPath: winPanel
+      value: 
+      objectReference: {fileID: 525174969}
+    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
+      propertyPath: losePanel
+      value: 
+      objectReference: {fileID: 29004915}
+    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
+      propertyPath: winMessageText
+      value: 
+      objectReference: {fileID: 450855296}
+    - target: {fileID: 7542646046023015122, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
+      propertyPath: lostMessageText
+      value: 
+      objectReference: {fileID: 450855295}
     - target: {fileID: 7558494830803327370, guid: 68e94aff4a2d01a4fb86425079736e01, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

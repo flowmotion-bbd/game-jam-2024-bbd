@@ -11239,6 +11239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1744562292}
   - component: {fileID: 1744562293}
+  - component: {fileID: 1744562294}
   m_Layer: 0
   m_Name: FirePacmanManager
   m_TagString: Untagged
@@ -11278,14 +11279,26 @@ MonoBehaviour:
     - Welcome!
   minigameLostDialogue:
     sentences: []
-  wonPanel: {fileID: 1004179247}
-  winScoreText: {fileID: 2829937196894912789}
-  lostPanel: {fileID: 855411448}
-  lostScoreText: {fileID: 2829937196894912788}
   flames: []
   hackerman: {fileID: 1197567263}
   time: {fileID: 361625741}
   timeTaken: 0
+--- !u!114 &1744562294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744562291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaad86cb2e04a6046859c3096d58bd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winPanel: {fileID: 1004179247}
+  winMessageText: {fileID: 2829937196894912789}
+  losePanel: {fileID: 855411448}
+  lostMessageText: {fileID: 2829937196894912788}
 --- !u!1 &1841505072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5874001750792411898, guid: 2231f643ccff22d4998c5c85f3fa304e, type: 3}
