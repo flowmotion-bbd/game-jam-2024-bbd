@@ -222,5 +222,6 @@ public class PatternMatchBoard : MinigameManager
         ShowAllTiles();
         StartCoroutine(HideTilesDelayed(initialLookingTime));
         timerSlider.StartTimerSliderTransition(initialLookingTime);
+        minigameInProgress = true;
     }
 }

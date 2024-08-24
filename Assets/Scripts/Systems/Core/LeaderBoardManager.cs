@@ -60,7 +60,7 @@ public class LeaderBoardManager : MonoBehaviour
         var leaderboardId = LEADERBOARD_ID_PREFIX + level.ToString();
         return leaderboardId;
     }
-    private string ConvertMillisecondsToTimeFormat(int milliseconds)
+    public string ConvertMillisecondsToTimeFormat(int milliseconds)
     {
         TimeSpan time = TimeSpan.FromMilliseconds(milliseconds);
 
@@ -72,11 +72,11 @@ public class LeaderBoardManager : MonoBehaviour
         return formattedTime;
     }
 
-    public async Task<LeaderboardResponse> GetScoresForLevelAsync(int level)
+    public async Task<LeaderboardResponse> GetScoresForLevelAsync(int level, int limit=10, int offset=0)
     {
         try
         {
-            var jsonResponse = await LeaderboardsService.Instance.GetScoresAsync(formatLeaderBoardId(level));
+            var jsonResponse = await LeaderboardsService.Instance.GetScoresAsync(formatLeaderBoardId(level), new GetScoresOptions { Limit=limit, Offset=offset});
 
             var leaderboardData = JsonConvert.DeserializeObject<LeaderboardResponse>(JsonConvert.SerializeObject(jsonResponse));
 
@@ -124,12 +124,23 @@ public class LeaderBoardManager : MonoBehaviour
         }
     }
 
-    public async Task<string> AddPlayerScoreForLevelAsync(int level, int levelTimeMs)
+    public async Task<PlayerScore> AddPlayerScoreForLevelAsync(int level, int levelTimeMs)
     {
         try
         {
             var response = await LeaderboardsService.Instance.AddPlayerScoreAsync(formatLeaderBoardId(level), levelTimeMs);
-            return JsonConvert.SerializeObject(response);
+
+            var playerData = JsonConvert.DeserializeObject<PlayerScore>(JsonConvert.SerializeObject(response));
+
+            var nameLen = playerData.playerName.Length;
+            if (nameLen > NAME_SUFFIX_LENGTH)
+            {
+                playerData.playerName = playerData.playerName[..(nameLen - NAME_SUFFIX_LENGTH)];
+            }
+            playerData.timeScore = ConvertMillisecondsToTimeFormat((int)playerData.score);
+
+
+            return playerData;
         }
         catch (Exception ex)
         {

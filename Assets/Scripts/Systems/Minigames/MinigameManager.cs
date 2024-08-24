@@ -47,14 +47,15 @@ public abstract class MinigameManager : MonoBehaviour
 
     public void GameOver(bool hasWon)
     {
+        Debug.Log("have I won?" + hasWon.ToString());
         if (minigameInProgress == false || minigameOver == true)
         {
             return;
         }
 
+        Debug.Log("after");
         minigameInProgress = false;
         minigameWon = hasWon;
-
         if (hasWon)
         {
             MinigameUIManager.Instance.ShowWinScreen("You scored " + scoreAchieved.ToString("F3") + " seconds");

@@ -22,8 +22,9 @@ public class LevelUIManager : MonoBehaviour
         HideEndLevelScreen();
     }
 
-    public void ShowEndLevelScreen()
+    public void ShowEndLevelScreen(float elapsedTime)
     {
+        EndLeveUIManager.Instance.PopulateLevelLeaderBoard(elapsedTime);
         endLevelScreen.SetActive(true);
     }
 
