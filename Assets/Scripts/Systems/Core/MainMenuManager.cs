@@ -36,6 +36,7 @@ public class MainMenuManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         GenerateLevelButtons();
+        usernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
     }
 
     void GenerateLevelButtons()
