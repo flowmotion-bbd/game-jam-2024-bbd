@@ -11,12 +11,16 @@ public class Sneaker : MonoBehaviour
     private Light2D playerLight;
 
     private float maxLightRadius;
+    private float minLightRadius = 3f;
+
+    private float originalLightInnerRadius;
 
     private void Awake()
     {
         playerLight = GetComponent<Light2D>();
         sneakMinigameManager = FindAnyObjectByType<SneakMinigameManager>();
         maxLightRadius = playerLight.pointLightOuterRadius;
+        originalLightInnerRadius = playerLight.pointLightInnerRadius;
         Invoke("DimLight", dimTime);
     }
 
@@ -30,20 +34,29 @@ public class Sneaker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Finish"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Packets"))
         {
-            sneakMinigameManager.GameOver(true);
+            sneakMinigameManager.AddToScore(-2);
+            collision.gameObject.SetActive(false);
         }
     }
 
     private void FixedUpdate()
     {
-        if (dim && playerLight.pointLightOuterRadius > 1)
+        if (dim && playerLight.pointLightOuterRadius > minLightRadius)
         {
             playerLight.pointLightOuterRadius -= 1;
         } else if (!dim && playerLight.pointLightOuterRadius < maxLightRadius)
         {
             playerLight.pointLightOuterRadius += 1;
+        }
+
+        if (dim)
+        {
+            playerLight.pointLightInnerRadius = playerLight.pointLightOuterRadius;
+        } else
+        {
+            playerLight.pointLightInnerRadius = originalLightInnerRadius;
         }
     }
 

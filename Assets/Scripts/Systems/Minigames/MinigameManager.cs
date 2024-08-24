@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public abstract class MinigameManager : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public abstract class MinigameManager : MonoBehaviour
 
     [SerializeField] private Dialogue minigameWonDialogue;
     [SerializeField] private Dialogue minigameLostDialogue;
+
+    [SerializeField] private float lossScore = 5f;
 
     public bool MinigameInProgess
     {
@@ -47,22 +51,21 @@ public abstract class MinigameManager : MonoBehaviour
 
     public void GameOver(bool hasWon)
     {
-        Debug.Log("have I won?" + hasWon.ToString());
         if (minigameInProgress == false || minigameOver == true)
         {
             return;
         }
 
-        Debug.Log("after");
         minigameInProgress = false;
         minigameWon = hasWon;
         if (hasWon)
         {
-            MinigameUIManager.Instance.ShowWinScreen("You scored " + scoreAchieved.ToString("F3") + " seconds");
+            MinigameUIManager.Instance.ShowWinScreen(scoreAchieved.ToString("F3") + " seconds was added to your current time!");
         }
         else
         {
-            MinigameUIManager.Instance.ShowLoseScreen("You scored " + scoreAchieved.ToString("F3") + " seconds");
+            scoreAchieved = lossScore;
+            MinigameUIManager.Instance.ShowLoseScreen(scoreAchieved.ToString("F3") + " seconds was added to your current time!");
         }
 
         StartCoroutine(SetMinigameOver());
@@ -83,6 +86,25 @@ public abstract class MinigameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         minigameOver = true;
+    }
+
+    List<float> SplitTime(float time)
+    {
+        time = Math.Abs(time);
+
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time - minutes * 60);
+        int milliseconds = Mathf.FloorToInt((time * 1000) % 1000);
+
+        return new List<float>() { minutes, seconds, milliseconds };
+    }
+
+    public string FormatTime(float time)
+    {
+        List<float> splitTime = SplitTime(time);
+
+        string signAppend = time < 0f ? "-" : "";
+        return signAppend + string.Format("{0:00}:{1:00}:{2:000}", splitTime[0], splitTime[1], splitTime[2]);
     }
 
     protected abstract void StartMinigame();
