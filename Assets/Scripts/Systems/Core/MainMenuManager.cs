@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -36,6 +37,12 @@ public class MainMenuManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         GenerateLevelButtons();
+        StartCoroutine(UpdateAfterAuth());
+    }
+
+    private IEnumerator UpdateAfterAuth()
+    {
+        yield return new WaitUntil(() => { return AuthManager.Instance.IsSignedIn(); });
         usernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
     }
 
@@ -188,6 +195,11 @@ public class MainMenuManager : MonoBehaviour
 
     public async void UpdateUsername()
     {
+        if (usernameInputField.text == "" || usernameInputField.text == AuthManager.Instance.PlayerUsername)
+        {
+            return;
+        }
+
         Debug.Log("New Username: " + usernameInputField.text);
         await AuthManager.Instance.UpdatePlayerNameAsync(usernameInputField.text);
     }
