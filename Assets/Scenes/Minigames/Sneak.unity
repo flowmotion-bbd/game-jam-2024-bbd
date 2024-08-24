@@ -10076,6 +10076,14 @@ PrefabInstance:
       propertyPath: m_PointLightOuterRadius
       value: 12.54
       objectReference: {fileID: 0}
+    - target: {fileID: 1971090748741745092, guid: 96f49aed08ad0bb47bbff88a20515a14, type: 3}
+      propertyPath: turnFactor
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971090748741745092, guid: 96f49aed08ad0bb47bbff88a20515a14, type: 3}
+      propertyPath: acccelaratorFactor
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3780787373194616482, guid: 96f49aed08ad0bb47bbff88a20515a14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -38.5
@@ -10115,6 +10123,14 @@ PrefabInstance:
     - target: {fileID: 3780787373194616482, guid: 96f49aed08ad0bb47bbff88a20515a14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053077663805441587, guid: 96f49aed08ad0bb47bbff88a20515a14, type: 3}
+      propertyPath: m_LinearDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053077663805441587, guid: 96f49aed08ad0bb47bbff88a20515a14, type: 3}
+      propertyPath: m_AngularDrag
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
