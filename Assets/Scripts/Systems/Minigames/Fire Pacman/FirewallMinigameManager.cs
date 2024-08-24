@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,22 +8,24 @@ public class FirewallMinigameManager : MinigameManager
 
     public GameObject hackerman;
 
-    public TMP_Text time;
+    public TMP_Text timeText;
 
-    public float timeTaken;
+    public int numberOfFlameAgents = 4;
+
+    [SerializeField] private Transform spawnPointsParent;
+    [SerializeField] private GameObject fireAgentObject;
 
     protected override void StartMinigame()
     {
-        timeTaken = 0f;
+        scoreAchieved = 0f;
         minigameInProgress = true;
     }
 
-    // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
 
-        time.text = "";
+        SpawnFireAgents();
     }
 
     private new void Update()
@@ -31,9 +34,30 @@ public class FirewallMinigameManager : MinigameManager
 
         if (minigameInProgress)
         {
-            timeTaken += Time.deltaTime;
-            time.text = "Time Taken: " + timeTaken.ToString("F2");
-            scoreAchieved = timeTaken;
+            scoreAchieved += Time.deltaTime;
+            timeText.text = FormatTime(scoreAchieved);
+        }
+    }
+
+    void SpawnFireAgents()
+    {
+        Transform[] spawnPoints = spawnPointsParent.GetComponentsInChildren<Transform>();
+        int spawnCount = Mathf.Min(numberOfFlameAgents, spawnPoints.Length - 1);
+
+        List<int> usedIndices = new List<int>();
+        for (int i = 0; i < spawnCount; i++)
+        {
+            int randomIndex;
+
+            do
+            {
+                randomIndex = Random.Range(1, spawnPoints.Length);
+            }
+            while (usedIndices.Contains(randomIndex));
+
+            usedIndices.Add(randomIndex);
+
+            Instantiate(fireAgentObject, spawnPoints[randomIndex].position, spawnPoints[randomIndex].rotation);
         }
     }
 }
