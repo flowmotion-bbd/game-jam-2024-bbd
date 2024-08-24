@@ -2678,10 +2678,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1513692992760944281, guid: df6f68fe526e6304195d352056727dec, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3474726248565283152, guid: df6f68fe526e6304195d352056727dec, type: 3}
       propertyPath: m_Name
       value: LevelUICanvas

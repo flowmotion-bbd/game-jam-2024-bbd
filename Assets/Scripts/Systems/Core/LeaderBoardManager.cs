@@ -60,7 +60,7 @@ public class LeaderBoardManager : MonoBehaviour
         var leaderboardId = LEADERBOARD_ID_PREFIX + level.ToString();
         return leaderboardId;
     }
-    private string ConvertMillisecondsToTimeFormat(int milliseconds)
+    public string ConvertMillisecondsToTimeFormat(int milliseconds)
     {
         TimeSpan time = TimeSpan.FromMilliseconds(milliseconds);
 
