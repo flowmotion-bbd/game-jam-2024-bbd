@@ -6,31 +6,31 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/_Scenes/Main Menu.unity
     guid: 4cc72062abc128a4cbbcc5cca25fb3cf
   - enabled: 1
-    path: Assets/Scenes/Minigames/Wordle.unity
+    path: Assets/_Scenes/Minigames/Wordle.unity
     guid: 9a63aca423d556a4489158a8e1b1ea07
   - enabled: 1
-    path: Assets/Scenes/Minigames/Fire Pacman.unity
+    path: Assets/_Scenes/Minigames/Fire Pacman.unity
     guid: c85a73d81c5c05344824c65a4d2c56b6
   - enabled: 1
-    path: Assets/Scenes/Minigames/Pattern-Matching.unity
+    path: Assets/_Scenes/Minigames/Pattern-Matching.unity
     guid: 617b5564feca5ee4989fcaa82c1dfa8f
   - enabled: 1
-    path: Assets/Scenes/Minigames/Router-Minigame.unity
+    path: Assets/_Scenes/Minigames/Router-Minigame.unity
     guid: f9718b057c69cd74ba1c2c737c94cbd6
   - enabled: 1
-    path: Assets/Scenes/Minigames/Sneak.unity
+    path: Assets/_Scenes/Minigames/Sneak.unity
     guid: 220fe311454109c4da9057a32a24584a
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 1.unity
+    path: Assets/_Scenes/Levels/Level 1.unity
     guid: 7fda392d2300fc94389043003fa77242
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 2.unity
+    path: Assets/_Scenes/Levels/Level 2.unity
     guid: 17754e13dd6947b48bef35e96102195b
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 3.unity
+    path: Assets/_Scenes/Levels/Level 3.unity
     guid: a28e63c6916f4c14e89a22f867e8ac51
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
