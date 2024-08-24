@@ -19,6 +19,9 @@ public class MainMenuManager : MonoBehaviour
     [Header("Leaderboards")]
     [SerializeField] Transform leaderboardLevelButtonContainer;
     [SerializeField] GameObject leaderboardLevelButton;
+    [SerializeField] Transform leaderboardEntryParent;
+    [SerializeField] GameObject leaderboardEntry;
+    [SerializeField] GameObject leaderboardEmpty;
 
     [Header("Levels")]
     [SerializeField] Transform levelButtonContainer;
@@ -97,7 +100,39 @@ public class MainMenuManager : MonoBehaviour
 
         if (buttonComponent != null)
         {
-            buttonComponent.onClick.AddListener(() => { });
+            buttonComponent.onClick.AddListener(() => PopulateLeaderboard(int.Parse(sceneName.Replace(levelNamePrefix, ""))));
+        }
+    }
+
+    async void PopulateLeaderboard(int levelNumber)
+    {
+        foreach (Transform child in leaderboardEntryParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int offset = 0;
+        int total;
+        int current = 0;
+        do
+        {
+            LeaderboardResponse leaderboardResponse = await LeaderBoardManager.Instance.GetScoresForLevelAsync(levelNumber, 20, offset);
+
+            total = leaderboardResponse.total;
+
+            foreach (LeaderboardResult result in leaderboardResponse.results)
+            {
+                current++;
+                var entryInstance = Instantiate(leaderboardEntry, leaderboardEntryParent);
+                entryInstance.GetComponent<LevelLeaderBoardEntry>().SetEntryInformation(result.rank + 1, result.playerName, result.timeScore);
+            }
+
+            offset += current;
+        } while (total < current);
+
+        if (current <= 0)
+        {
+            Instantiate(leaderboardEmpty, leaderboardEntryParent);
         }
     }
 
