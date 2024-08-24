@@ -99,7 +99,7 @@ public class LevelManager : MonoBehaviour
                 if (LevelFinished())
                 {
                     StopTimer();
-                    levelUIManager.ShowEndLevelScreen();
+                    levelUIManager.ShowEndLevelScreen(elapsedTime);
                 }
 
                 for (int i = 0; i <= 9; i++)

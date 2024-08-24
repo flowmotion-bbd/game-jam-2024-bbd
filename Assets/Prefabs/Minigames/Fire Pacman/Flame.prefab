@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8207529957212585892}
   - component: {fileID: 6588899654408981625}
   - component: {fileID: 9162173341996447366}
-  - component: {fileID: 6568652077087580880}
   - component: {fileID: 1975157433498559452}
   m_Layer: 0
   m_Name: Flame
@@ -148,19 +147,6 @@ NavMeshAgent:
   m_BaseOffset: 0.25
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6568652077087580880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5874001750792411898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c56d20322766e54dae048451531107d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hackerman: {fileID: 0}
 --- !u!50 &1975157433498559452
 Rigidbody2D:
   serializedVersion: 4

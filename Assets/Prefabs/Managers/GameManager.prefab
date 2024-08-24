@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5414876425957218238}
   - component: {fileID: 8116636853218576963}
+  - component: {fileID: 9053369687987938367}
+  - component: {fileID: 3203280612215422908}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,3 +47,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSceneName: Main Menu
+--- !u!114 &9053369687987938367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251396961743333505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a2b79c9ea963e4c8a6052d4754b949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3203280612215422908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251396961743333505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfb67dc5f3128545b98b3fcda7712cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
