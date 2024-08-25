@@ -4219,13 +4219,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2265367312086753693, guid: b9adb7ede958c6443a0a7a16d64fc69e, type: 3}
       propertyPath: levelStartDialogue.sentences.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2265367312086753693, guid: b9adb7ede958c6443a0a7a16d64fc69e, type: 3}
       propertyPath: 'levelStartDialogue.sentences.Array.data[0]'
-      value: Larger networks have router nodes that control access to multiple connected
-        nodes at once. Breaching these can quickly expand your reach but comes with
-        higher risks.
+      value: You've tapped into a smaller company's network, but don't be fooled
+        by their size. They have secrets to protect, and they'll do whatever it takes
+        to keep them hidden. Tread carefully.
       objectReference: {fileID: 0}
     - target: {fileID: 2265367312086753693, guid: b9adb7ede958c6443a0a7a16d64fc69e, type: 3}
       propertyPath: 'levelStartDialogue.sentences.Array.data[1]'
