@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -111,7 +112,11 @@ public class LevelManager : MonoBehaviour
 
                     if (Input.GetKeyDown(mainKey) || Input.GetKeyDown(numpadKey))
                     {
-                        currentDataPathIndex = i - 1;
+                        if (graphState.DataPaths.Count >= i)
+                        {
+                            currentDataPathIndex = i - 1;
+                        }
+
                     }
                 }
             }
@@ -255,5 +260,26 @@ public class LevelManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         gameManager.LoadLevel("Main Menu");
+    }
+
+    public void LoadNextLevel()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        string levelNumberStr = currentSceneName[EndLeveUIManager.levelNamePrefix.Length..];
+        if (int.TryParse(levelNumberStr, out int levelNumber))
+        {
+            List<string> sceneNames = MainMenuManager.GetLevelSceneNames();
+            string targetSceneName = EndLeveUIManager.levelNamePrefix + (levelNumber + 1).ToString();
+
+            if (sceneNames.Contains(targetSceneName))
+            {
+                SceneManager.LoadScene(targetSceneName);
+            }
+            else
+            {
+                Debug.LogWarning($"Scene '{targetSceneName}' not found in the list of available scenes.");
+                ReturnToMainMenu();
+            }
+        }
     }
 }

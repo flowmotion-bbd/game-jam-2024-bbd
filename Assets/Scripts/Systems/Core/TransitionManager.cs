@@ -128,7 +128,7 @@ public class TransitionManager : MonoBehaviour
 
         tranitionText.text = "Successfully Connected to " + ipAddress;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         TransitionOut(FindAnyObjectByType<MinigameManager>().StartMinigameDialogue);
     }
@@ -154,7 +154,7 @@ public class TransitionManager : MonoBehaviour
             levelManager.ShowLevelObjects();
         }
 
-        while (!asyncUnload.isDone || Time.time - startTime < 3f)
+        while (!asyncUnload.isDone || Time.time - startTime < 1.5f)
         {
             yield return null;
         }
@@ -164,7 +164,7 @@ public class TransitionManager : MonoBehaviour
 
         tranitionText.text = "Disconnected from " + ipAddress;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         TransitionOut(transitionCallback);
     }

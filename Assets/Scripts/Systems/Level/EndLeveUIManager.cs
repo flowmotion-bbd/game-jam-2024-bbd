@@ -14,7 +14,7 @@ public class EndLeveUIManager : MonoBehaviour
     [SerializeField] TMP_Text userRankText = null;
 
     [Header("Level Info")]
-    [SerializeField] string levelNamePrefix = "Level ";
+    [SerializeField] public static string levelNamePrefix = "Level ";
 
     const int NUM_ENTRIES_TO_DISPLAY = 5;
 

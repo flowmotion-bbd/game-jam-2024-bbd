@@ -553,8 +553,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 485.08, y: -311}
-  m_SizeDelta: {x: 213.5802, y: 30}
+  m_AnchoredPosition: {x: 301.26, y: -312}
+  m_SizeDelta: {x: 154.0431, y: 52.8347}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2900320239050885096
 CanvasRenderer:
@@ -616,8 +616,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.18431373, g: 0.7137255, b: 0.9058824, a: 1}
+    m_PressedColor: {r: 0.0627451, g: 0.52156866, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -640,7 +640,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8482141989404479563}
         m_TargetAssemblyTypeName: LevelUIManager, Assembly-CSharp
-        m_MethodName: RetryLevel
+        m_MethodName: NextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -877,7 +877,6 @@ MonoBehaviour:
   userCurrentTimeText: {fileID: 2104193289881775750}
   userBestTimeText: {fileID: 3835357967757970930}
   userRankText: {fileID: 8221259045682844154}
-  levelNamePrefix: 'Level '
 --- !u!1 &3958179453927351465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,6 +1568,7 @@ GameObject:
   - component: {fileID: 7703245131982907681}
   - component: {fileID: 7641342840687180601}
   - component: {fileID: 3166552407432052445}
+  - component: {fileID: 3662488982619716487}
   m_Layer: 5
   m_Name: LevelCompletedText
   m_TagString: Untagged
@@ -1593,7 +1593,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -57}
-  m_SizeDelta: {x: 290.8709, y: 50}
+  m_SizeDelta: {x: 448.48, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7641342840687180601
 CanvasRenderer:
@@ -1632,8 +1632,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293441327
+  m_fontColor: {r: 0.18431373, g: 0.7176471, b: 0.909804, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1650,10 +1650,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.1
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 5
@@ -1694,6 +1694,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3662488982619716487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6494108563055849380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d600f1b65dc5f8248835af5cac3352d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  targetColor: {r: 0.18431373, g: 0.7176471, b: 0.909804, a: 1}
+  fadeDuration: 2
 --- !u!1 &7131895859584038768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,8 +2094,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -470.01, y: -311}
-  m_SizeDelta: {x: 213.5802, y: 30}
+  m_AnchoredPosition: {x: -301.26, y: -312}
+  m_SizeDelta: {x: 154.0431, y: 52.8347}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &725816352441454029
 CanvasRenderer:
@@ -2141,8 +2157,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.18431373, g: 0.7137255, b: 0.9058824, a: 1}
+    m_PressedColor: {r: 0.0627451, g: 0.52156866, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2347,8 +2363,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -311}
-  m_SizeDelta: {x: 213.58, y: 30}
+  m_AnchoredPosition: {x: 0.00000023842, y: -312}
+  m_SizeDelta: {x: 154.0429, y: 52.8347}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1043867260430560487
 CanvasRenderer:
@@ -2410,8 +2426,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.18431373, g: 0.7137255, b: 0.9058824, a: 1}
+    m_PressedColor: {r: 0.0627451, g: 0.52156866, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1

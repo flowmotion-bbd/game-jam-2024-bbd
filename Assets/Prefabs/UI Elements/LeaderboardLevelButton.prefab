@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 7877736926561099817}
   - component: {fileID: 5191031312451211363}
   - component: {fileID: 6725805947573495384}
+  - component: {fileID: -2178925103165083249}
   m_Layer: 5
   m_Name: LeaderboardLevelButton
   m_TagString: Untagged
@@ -269,3 +270,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-2178925103165083249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052973019546862539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65f4d9a0f48d404c8895017b868ff09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
