@@ -27,7 +27,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (!isPaused)
             {
@@ -46,7 +46,7 @@ public class PauseManager : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
-    void Pause()
+    public void Pause()
     {
         if (GameManager.Instance.IsScenePausible())
         {

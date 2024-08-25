@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 public class AuthManager : MonoBehaviour
 {
     public static AuthManager Instance { get; private set; }
-    public string PlayerUsername { get; private set; }
+    public string PlayerUsername { get; set; }
 
     private async void Awake()
     {

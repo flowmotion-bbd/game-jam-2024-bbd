@@ -1,2 +1,24 @@
-karlo,Very very very cool guy
-fangs,Spider teeth basically
+BREAD,Favorite food
+FABLE,The Tortoise and the Hare
+JUMPY,Rabbit and kangaroo commonality
+VIVID,Bright and clear
+MELON,Red with seeds
+BRISK,Speed walk
+BLOOD,Life juice
+WATER,Juice for life
+WATCH,Time traveller
+CLOUD,Fluffy fly thing
+GRAPE,Yummy juice ingredient
+CRANE,Tall lift
+FANGS,Eight leg teeth
+CLASH,Supercell
+GRILL,Braai
+BRAAI,Better grill
+HACKS,This game
+TOKEN,Must refresh auth
+LOGIN,OAuth
+PATCH,Fix security
+ALERT,Pagerduty
+PAINT,Fix the welder you ain't
+STICK,May break my bones
+STONE,Smelted cobble

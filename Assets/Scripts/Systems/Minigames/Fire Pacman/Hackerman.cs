@@ -18,6 +18,9 @@ public class Hackerman : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Finish"))
         {
             firewallMinigameManager.GameOver(true);
+        } else if (collision.gameObject.layer == LayerMask.NameToLayer("Fire"))
+        {
+            firewallMinigameManager.GameOver(false);
         }
     }
 

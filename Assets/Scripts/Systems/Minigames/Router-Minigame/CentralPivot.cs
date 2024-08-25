@@ -13,7 +13,7 @@ public class CentralPivot : MinigameManager
     private static readonly Color COL_SIX = new Color32(66, 212, 244, 255);
     private static readonly Color COL_SEVEN = new Color32(245, 130, 49, 255);
 
-    private readonly float refPivotAngleDeg = 90f;
+    private readonly float refPivotAngleDeg = 0f;
     private readonly float refCornerAngle = Mathf.Atan(((float)Screen.height / 2) / ((float)Screen.width / 2));
 
     [Header("Styles")]

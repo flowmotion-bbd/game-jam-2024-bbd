@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -80,8 +81,10 @@ public class LevelManager : MonoBehaviour
             obj.SetActive(false);
         }
     }
-    void ShowLevelObjects()
+
+    public void ShowLevelObjects()
     {
+        Debug.Log("Showing Level Objects");
         foreach (GameObject obj in levelObjects)
         {
             obj.SetActive(true);
@@ -109,19 +112,16 @@ public class LevelManager : MonoBehaviour
 
                     if (Input.GetKeyDown(mainKey) || Input.GetKeyDown(numpadKey))
                     {
-                        currentDataPathIndex = i - 1;
+                        if (graphState.DataPaths.Count >= i)
+                        {
+                            currentDataPathIndex = i - 1;
+                        }
+
                     }
                 }
             }
 
             graphRenderer.UpdateGraph(currentDataPathIndex);
-        } else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Debug.Log("Escaped");
-                MinigameCallback(true, -5f, new Dialogue());
-            }
         }
     }
 
@@ -215,6 +215,7 @@ public class LevelManager : MonoBehaviour
         graphController.ResetState();
         levelUIManager.HideEndLevelScreen();
         StartCountDown();
+        Debug.Log("RestartLevel");
     }
 
     public void LoadMinigame(string minigameSceneName, NodeState nodeState)
@@ -230,20 +231,13 @@ public class LevelManager : MonoBehaviour
             this.isInMinigame = true;
             this.isTiming = false;
             minigameNodeState = nodeState;
-            gameManager.LoadMinigame(minigameSceneName, true, HideLevelObjects);
+            gameManager.LoadMinigame(minigameSceneName, true);
         }
-    }
-
-    void UnloadMinigame()
-    {
-        gameManager.UnloadMinigame(minigameSceneName);
-        ShowLevelObjects();
     }
 
     public void MinigameCallback(bool won, float timeChange, Dialogue dialogue)
     {
         elapsedTime += timeChange;
-        UnloadMinigame();
         ShowLevelObjects();
         isInMinigame = false;
 
@@ -266,5 +260,26 @@ public class LevelManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         gameManager.LoadLevel("Main Menu");
+    }
+
+    public void LoadNextLevel()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        string levelNumberStr = currentSceneName[EndLeveUIManager.levelNamePrefix.Length..];
+        if (int.TryParse(levelNumberStr, out int levelNumber))
+        {
+            List<string> sceneNames = MainMenuManager.GetLevelSceneNames();
+            string targetSceneName = EndLeveUIManager.levelNamePrefix + (levelNumber + 1).ToString();
+
+            if (sceneNames.Contains(targetSceneName))
+            {
+                SceneManager.LoadScene(targetSceneName);
+            }
+            else
+            {
+                Debug.LogWarning($"Scene '{targetSceneName}' not found in the list of available scenes.");
+                ReturnToMainMenu();
+            }
+        }
     }
 }

@@ -35,28 +35,35 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
-    public void TransitionBetweenMinigames(string sceneName, bool additive, Action transitionCallback)
+    public void TransitionToMinigame(string sceneName, bool additive)
     {
         tranitionPanel.SetActive(true);
         transitioning = true;
         animator.SetBool("IsTransitioning", true);
-        StartCoroutine(LoadMinigameScene(sceneName, additive, transitionCallback));
+        StartCoroutine(LoadMinigameScene(sceneName, additive));
     }
 
-    public void TransitionOut()
+    public void TransitionFromMinigame(string sceneName, bool additive, Action transitionCallback)
+    {
+        Debug.Log("Transitioning from Minigame");
+        tranitionPanel.SetActive(true);
+        transitioning = true;
+        animator.SetBool("IsTransitioning", true);
+        StartCoroutine(UnloadMinigameScene(sceneName, additive, transitionCallback));
+    }
+    public void TransitionOut(Action transitionOutCallback)
     {
         animator.SetBool("IsTransitioning", false);
         tranitionPanel.SetActive(false);
         transitioning = false;
 
-        MinigameManager minigameManager = FindAnyObjectByType<MinigameManager>();
-        if (minigameManager != null)
+        if (transitionOutCallback != null)
         {
-            minigameManager.StartMinigameDialogue();
+            transitionOutCallback();
         }
     }
 
-    IEnumerator TransitionText()
+    IEnumerator TransitionToMinigameText()
     {
         ipAddress = RandomIPAddress();
         tranitionText.text = "Connecting to " + ipAddress + " ";
@@ -74,39 +81,92 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
-    IEnumerator LoadMinigameScene(string sceneName, bool additive, Action transitionCallback)
+    IEnumerator TransitionFromMinigameText()
     {
-        StartCoroutine("TransitionText");
+        tranitionText.text = "Disconnecting from " + ipAddress + " ";
+        while (transitioning)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            if (tranitionText.text.Contains("..."))
+            {
+                tranitionText.text = "Disconnecting from  " + ipAddress + " ";
+            }
+            else
+            {
+                tranitionText.text += ".";
+            }
+        }
+    }
+
+    IEnumerator LoadMinigameScene(string sceneName, bool additive)
+    {
+        StartCoroutine(TransitionToMinigameText());
 
         float startTime = Time.time;
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, additive ? LoadSceneMode.Additive : LoadSceneMode.Single);
         asyncLoad.allowSceneActivation = false;
 
-        // Wait until the minimum time has passed and the scene is ready to activate
         while (!asyncLoad.isDone)
         {
-            // If the scene is fully loaded, but the minimum time hasn't passed, wait
             if (asyncLoad.progress >= 0.9f && Time.time - startTime >= 3f)
             {
                 asyncLoad.allowSceneActivation = true;
                 transitioning = false;
-                StopCoroutine("TransitionText");
+                StopCoroutine(TransitionToMinigameText());
             }
 
             yield return null;
         }
 
-        if (transitionCallback != null)
+        LevelManager levelManager = FindAnyObjectByType<LevelManager>();
+        if (levelManager != null)
         {
-            transitionCallback();
+            levelManager.HideLevelObjects();
         }
 
         tranitionText.text = "Successfully Connected to " + ipAddress;
 
         yield return new WaitForSeconds(1f);
 
-        TransitionOut();
+        TransitionOut(FindAnyObjectByType<MinigameManager>().StartMinigameDialogue);
+    }
+
+    IEnumerator UnloadMinigameScene(string sceneName, bool additive, Action transitionCallback)
+    {
+        StartCoroutine(TransitionFromMinigameText());
+
+        float startTime = Time.time;
+
+        AsyncOperation asyncUnload;
+        if (additive)
+        {
+            asyncUnload = SceneManager.UnloadSceneAsync(sceneName);
+        } else
+        {
+            asyncUnload = SceneManager.LoadSceneAsync(sceneName);
+        }
+
+        LevelManager levelManager = FindAnyObjectByType<LevelManager>();
+        if (levelManager != null)
+        {
+            levelManager.ShowLevelObjects();
+        }
+
+        while (!asyncUnload.isDone || Time.time - startTime < 1.5f)
+        {
+            yield return null;
+        }
+
+        transitioning = false;
+        StopCoroutine(TransitionFromMinigameText());
+
+        tranitionText.text = "Disconnected from " + ipAddress;
+
+        yield return new WaitForSeconds(1f);
+
+        TransitionOut(transitionCallback);
     }
 
     string RandomIPAddress()

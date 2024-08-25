@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 
@@ -37,6 +38,11 @@ public class LevelUIManager : MonoBehaviour
     {
         timerText.text = FormatTime(0f);
         levelManager.RestartLevel();
+    }
+
+    public void NextLevel()
+    {
+        levelManager.LoadNextLevel();
     }
 
     List<float> SplitTime(float time)

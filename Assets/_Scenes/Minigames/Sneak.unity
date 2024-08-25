@@ -8900,21 +8900,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3428595712649073649, guid: d77d13454a0c57d4fac8980fd8d08302, type: 3}
-      propertyPath: time
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3428595712649073649, guid: d77d13454a0c57d4fac8980fd8d08302, type: 3}
-      propertyPath: timeLeft
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3428595712649073649, guid: d77d13454a0c57d4fac8980fd8d08302, type: 3}
       propertyPath: globalLight
       value: 
       objectReference: {fileID: 1077520437}
-    - target: {fileID: 3428595712649073649, guid: d77d13454a0c57d4fac8980fd8d08302, type: 3}
-      propertyPath: packetObject
-      value: 
-      objectReference: {fileID: 8370416244822399958, guid: 79928e50597ea5e4695363dcf88d24ec, type: 3}
     - target: {fileID: 3428595712649073649, guid: d77d13454a0c57d4fac8980fd8d08302, type: 3}
       propertyPath: spawnPointsParent
       value: 

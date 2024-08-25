@@ -14,9 +14,6 @@ public abstract class MinigameManager : MonoBehaviour
 
     [SerializeField] private Dialogue startMinigameDialogue;
 
-    [SerializeField] private Dialogue minigameWonDialogue;
-    [SerializeField] private Dialogue minigameLostDialogue;
-
     [SerializeField] private float lossScore = 5f;
 
     public bool MinigameInProgess
@@ -46,7 +43,7 @@ public abstract class MinigameManager : MonoBehaviour
 
     protected void EndMinigame()
     {
-        gameManager.MinigameEnded(minigameWon, scoreAchieved, minigameWon ? minigameWonDialogue : minigameLostDialogue);
+        gameManager.MinigameEnded(minigameWon, scoreAchieved, null);
     }
 
     public void GameOver(bool hasWon)
@@ -60,12 +57,12 @@ public abstract class MinigameManager : MonoBehaviour
         minigameWon = hasWon;
         if (hasWon)
         {
-            MinigameUIManager.Instance.ShowWinScreen(scoreAchieved.ToString("F3") + " seconds was added to your current time!");
+            MinigameUIManager.Instance.ShowWinScreen(scoreAchieved.ToString("F3") + " seconds will be added to your current time!");
         }
         else
         {
             scoreAchieved = lossScore;
-            MinigameUIManager.Instance.ShowLoseScreen(scoreAchieved.ToString("F3") + " seconds was added to your current time!");
+            MinigameUIManager.Instance.ShowLoseScreen(scoreAchieved.ToString("F3") + " seconds will be added to your current time!");
         }
 
         StartCoroutine(SetMinigameOver());

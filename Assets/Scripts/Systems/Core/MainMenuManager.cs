@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject howToPlayPanel;
 
     [Header("Username")]
-    [SerializeField] TMP_InputField usernameInputField;
+    [SerializeField] InputField legacyUsernameInputField;
 
     [Header("Leaderboards")]
     [SerializeField] Transform leaderboardLevelButtonContainer;
@@ -23,11 +24,15 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] Transform leaderboardEntryParent;
     [SerializeField] GameObject leaderboardEntry;
     [SerializeField] GameObject leaderboardEmpty;
+    private List<GameObject> levelLeaderboardButton = new List<GameObject>();
 
     [Header("Levels")]
     [SerializeField] Transform levelButtonContainer;
     [SerializeField] GameObject levelButton;
-    [SerializeField] string levelNamePrefix = "Level ";
+
+    [Header("How To Play")]
+    [SerializeField] List<GameObject> howToPanels;
+    private int currentSelectedHowToPanel = 0;
 
     const string START_LEVEL_NAME = "Level 1";
 
@@ -38,12 +43,16 @@ public class MainMenuManager : MonoBehaviour
         gameManager = GameManager.Instance;
         GenerateLevelButtons();
         StartCoroutine(UpdateAfterAuth());
+        AudioManager.Instance.PlayRandomMusic();
     }
 
     private IEnumerator UpdateAfterAuth()
     {
         yield return new WaitUntil(() => { return AuthManager.Instance.IsSignedIn(); });
-        usernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
+        if (AuthManager.Instance.PlayerUsername != null)
+        {
+            legacyUsernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
+        }
     }
 
     void GenerateLevelButtons()
@@ -57,7 +66,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    List<string> GetLevelSceneNames()
+    public static List<string> GetLevelSceneNames()
     {
         int sceneCount = SceneManager.sceneCountInBuildSettings;
         List<string> levelSceneNames = new List<string>();
@@ -67,7 +76,7 @@ public class MainMenuManager : MonoBehaviour
             string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
             string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
 
-            if (sceneName.StartsWith(levelNamePrefix))
+            if (sceneName.StartsWith(EndLeveUIManager.levelNamePrefix))
             {
                 levelSceneNames.Add(sceneName);
             }
@@ -79,11 +88,14 @@ public class MainMenuManager : MonoBehaviour
     void CreateLevelButtonForScene(string sceneName)
     {
         GameObject buttonInstance = Instantiate(levelButton, levelButtonContainer);
+
+        levelLeaderboardButton.Add(buttonInstance);
+
         TMP_Text buttonText = buttonInstance.GetComponentInChildren<TMP_Text>();
 
         if (buttonText != null)
         {
-            buttonText.text = sceneName.Replace(levelNamePrefix, "");
+            buttonText.text = sceneName.Replace(EndLeveUIManager.levelNamePrefix, "");
         }
 
         Button buttonComponent = buttonInstance.GetComponent<Button>();
@@ -108,7 +120,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (buttonComponent != null)
         {
-            buttonComponent.onClick.AddListener(() => PopulateLeaderboard(int.Parse(sceneName.Replace(levelNamePrefix, ""))));
+            buttonComponent.onClick.AddListener(() => PopulateLeaderboard(int.Parse(sceneName.Replace(EndLeveUIManager.levelNamePrefix, ""))));
         }
     }
 
@@ -157,7 +169,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadMinigame(string minigameSceneName)
     {
-        gameManager.LoadMinigame(minigameSceneName, false, null);
+        gameManager.LoadMinigame(minigameSceneName, false);
     }
 
     public void LevelSelectButtonHandler()
@@ -191,16 +203,43 @@ public class MainMenuManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         leaderboardsPanel.SetActive(true);
+        PopulateLeaderboard(1); 
+
+        if (levelLeaderboardButton.Count > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(levelLeaderboardButton[0]);
+        }
     }
 
     public async void UpdateUsername()
     {
-        if (usernameInputField.text == "" || usernameInputField.text == AuthManager.Instance.PlayerUsername)
+        if (legacyUsernameInputField.text == "" || legacyUsernameInputField.text == AuthManager.Instance.PlayerUsername)
         {
             return;
         }
 
-        Debug.Log("New Username: " + usernameInputField.text);
-        await AuthManager.Instance.UpdatePlayerNameAsync(usernameInputField.text);
+        Debug.Log("New Username: " + legacyUsernameInputField.text);
+        await AuthManager.Instance.UpdatePlayerNameAsync(legacyUsernameInputField.text);
+    }
+
+    public void PreviousHowTo()
+    {
+        if (currentSelectedHowToPanel > 0)
+        {
+            howToPanels[currentSelectedHowToPanel].SetActive(false);
+            currentSelectedHowToPanel--;
+            howToPanels[currentSelectedHowToPanel].SetActive(true);
+        }
+    }
+
+    public void NextHowTo()
+    {
+
+        if (currentSelectedHowToPanel < howToPanels.Count - 1)
+        {
+            howToPanels[currentSelectedHowToPanel].SetActive(false);
+            currentSelectedHowToPanel++;
+            howToPanels[currentSelectedHowToPanel].SetActive(true);
+        }
     }
 }

@@ -94,7 +94,8 @@ public class Projectile : MonoBehaviour
         }
 
         EdgeTile edgeTile = closestEdgeTile.GetComponent<EdgeTile>();
-        bool didHit = minDist < 10f;
+        Debug.Log("ahh: "+ Mathf.Sqrt(minDist));
+        bool didHit = Mathf.Sqrt(minDist) < 80f;
         bool stylesMatched = edgeTile.Style.FillColor == style.FillColor;
 
         parent.ProjDestroy(didHit, stylesMatched, shouldHaveHit);
