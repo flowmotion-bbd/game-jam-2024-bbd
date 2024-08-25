@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,7 +16,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject howToPlayPanel;
 
     [Header("Username")]
-    //[SerializeField] TMP_InputField usernameInputField;
     [SerializeField] InputField legacyUsernameInputField;
 
     [Header("Leaderboards")]
@@ -24,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] Transform leaderboardEntryParent;
     [SerializeField] GameObject leaderboardEntry;
     [SerializeField] GameObject leaderboardEmpty;
+    private List<GameObject> levelLeaderboardButton = new List<GameObject>();
 
     [Header("Levels")]
     [SerializeField] Transform levelButtonContainer;
@@ -87,6 +88,9 @@ public class MainMenuManager : MonoBehaviour
     void CreateLevelButtonForScene(string sceneName)
     {
         GameObject buttonInstance = Instantiate(levelButton, levelButtonContainer);
+
+        levelLeaderboardButton.Add(buttonInstance);
+
         TMP_Text buttonText = buttonInstance.GetComponentInChildren<TMP_Text>();
 
         if (buttonText != null)
@@ -199,6 +203,12 @@ public class MainMenuManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         leaderboardsPanel.SetActive(true);
+        PopulateLeaderboard(1); 
+
+        if (levelLeaderboardButton.Count > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(levelLeaderboardButton[0]);
+        }
     }
 
     public async void UpdateUsername()
