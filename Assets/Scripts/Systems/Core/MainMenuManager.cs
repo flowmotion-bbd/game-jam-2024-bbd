@@ -30,6 +30,10 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject levelButton;
     [SerializeField] string levelNamePrefix = "Level ";
 
+    [Header("How To Play")]
+    [SerializeField] List<GameObject> howToPanels;
+    private int currentSelectedHowToPanel = 0;
+
     const string START_LEVEL_NAME = "Level 1";
 
     private GameManager gameManager;
@@ -206,5 +210,26 @@ public class MainMenuManager : MonoBehaviour
 
         Debug.Log("New Username: " + legacyUsernameInputField.text);
         await AuthManager.Instance.UpdatePlayerNameAsync(legacyUsernameInputField.text);
+    }
+
+    public void PreviousHowTo()
+    {
+        if (currentSelectedHowToPanel > 0)
+        {
+            howToPanels[currentSelectedHowToPanel].SetActive(false);
+            currentSelectedHowToPanel--;
+            howToPanels[currentSelectedHowToPanel].SetActive(true);
+        }
+    }
+
+    public void NextHowTo()
+    {
+
+        if (currentSelectedHowToPanel < howToPanels.Count - 1)
+        {
+            howToPanels[currentSelectedHowToPanel].SetActive(false);
+            currentSelectedHowToPanel++;
+            howToPanels[currentSelectedHowToPanel].SetActive(true);
+        }
     }
 }
