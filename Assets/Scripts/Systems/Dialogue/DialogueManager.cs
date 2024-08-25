@@ -3,14 +3,17 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
-{    public static DialogueManager Instance { get; private set; }
+{    
+    public static DialogueManager Instance { get; private set; }
 
     private Queue<string> sentences = new Queue<string>();
 
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject dialoguePannel;
 
     Action dialogueCallback;
 
@@ -29,6 +32,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue, Action dialogueCallback)
     {
+        ToggleButtonInteractibility(true);
         if (dialogue == null)
         {
             dialogue = new Dialogue();
@@ -73,7 +77,18 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialouge()
     {
+        ToggleButtonInteractibility(false);
         animator.SetBool("IsOpen", false);
         dialogueCallback();
+    }
+
+    private void ToggleButtonInteractibility(bool toggle)
+    {
+        Button[] buttons = dialoguePannel.GetComponentsInChildren<Button>();
+
+        foreach (Button button in buttons)
+        {
+            button.interactable = toggle;
+        }
     }
 }
