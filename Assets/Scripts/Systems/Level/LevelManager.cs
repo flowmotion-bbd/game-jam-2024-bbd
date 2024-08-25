@@ -65,7 +65,6 @@ public class LevelManager : MonoBehaviour
 
     void LevelStartDialogue()
     {
-        Debug.Log("LevelStartDialogue");
         dialogueManager.StartDialogue(levelStartDialogue, StartCountDown);
     }
 
@@ -81,8 +80,10 @@ public class LevelManager : MonoBehaviour
             obj.SetActive(false);
         }
     }
-    void ShowLevelObjects()
+
+    public void ShowLevelObjects()
     {
+        Debug.Log("Showing Level Objects");
         foreach (GameObject obj in levelObjects)
         {
             obj.SetActive(true);
@@ -116,13 +117,6 @@ public class LevelManager : MonoBehaviour
             }
 
             graphRenderer.UpdateGraph(currentDataPathIndex);
-        } else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Debug.Log("Escaped");
-                MinigameCallback(true, -5f, new Dialogue());
-            }
         }
     }
 
@@ -232,20 +226,13 @@ public class LevelManager : MonoBehaviour
             this.isInMinigame = true;
             this.isTiming = false;
             minigameNodeState = nodeState;
-            gameManager.LoadMinigame(minigameSceneName, true, HideLevelObjects);
+            gameManager.LoadMinigame(minigameSceneName, true);
         }
-    }
-
-    void UnloadMinigame()
-    {
-        gameManager.UnloadMinigame(minigameSceneName);
-        ShowLevelObjects();
     }
 
     public void MinigameCallback(bool won, float timeChange, Dialogue dialogue)
     {
         elapsedTime += timeChange;
-        UnloadMinigame();
         ShowLevelObjects();
         isInMinigame = false;
 
@@ -258,7 +245,6 @@ public class LevelManager : MonoBehaviour
         }
 
         dialogueManager.StartDialogue(dialogue, StartCountDown);
-        Debug.Log("MinigameCallback");
     }
 
     public void RemoveEdgeFromGraph(NodeState nodeState)
