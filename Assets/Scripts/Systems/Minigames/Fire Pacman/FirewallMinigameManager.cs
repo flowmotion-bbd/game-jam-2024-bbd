@@ -57,7 +57,7 @@ public class FirewallMinigameManager : MinigameManager
 
             usedIndices.Add(randomIndex);
 
-            Instantiate(fireAgentObject, spawnPoints[randomIndex].position, spawnPoints[randomIndex].rotation);
+            Instantiate(fireAgentObject, spawnPoints[randomIndex]);
         }
     }
 }
