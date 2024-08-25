@@ -48,8 +48,8 @@ MonoBehaviour:
     sentences:
     - Collect as many packets as you can in 20 seconds, without being detected by
       toucing the walls.
-    - The intrusion detection system is configured to make your life as hard as possible.
-      Therefore, your view will dim occasionally for a few seconds. Goodluck!
+    - The intrusion detection system is configured to occasionally decreased your
+      view for a few seconds. Goodluck!
   lossScore: 5
   minigameStatusText: {fileID: 0}
   spawnPointsParent: {fileID: 0}
