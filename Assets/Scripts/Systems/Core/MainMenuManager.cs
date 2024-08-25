@@ -43,7 +43,10 @@ public class MainMenuManager : MonoBehaviour
     private IEnumerator UpdateAfterAuth()
     {
         yield return new WaitUntil(() => { return AuthManager.Instance.IsSignedIn(); });
-        usernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
+        if (AuthManager.Instance.PlayerUsername != null)
+        {
+            usernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
+        }
     }
 
     void GenerateLevelButtons()

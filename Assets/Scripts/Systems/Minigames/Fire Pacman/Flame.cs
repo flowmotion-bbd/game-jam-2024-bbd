@@ -40,8 +40,7 @@ public class Flame : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (firewallMinigameManager.MinigameInProgess)
         {

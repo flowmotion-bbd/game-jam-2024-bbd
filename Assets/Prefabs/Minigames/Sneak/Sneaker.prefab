@@ -31,13 +31,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902382642798259912}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.051650196, w: 0.9986653}
+  m_LocalRotation: {x: 0, y: 0, z: 0.051647466, w: 0.9986654}
   m_LocalPosition: {x: -38.5, y: 0.5, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5.921}
 --- !u!212 &4461934149797564835
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: f63da2f463651b74a9b622ebe892120e, type: 3}
   m_Color: {r: 0, g: 0.745283, b: 0.15169638, a: 1}
   m_FlipX: 0
@@ -105,8 +105,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDrag: 5
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -154,7 +154,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.4587361
 --- !u!114 &-8882788580832993294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a1b96ab6c982b479c28837def2bff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acccelaratorFactor: 0.5
-  turnFactor: 0.02
+  acccelaratorFactor: 15
+  turnFactor: 10
 --- !u!114 &-5789299632323233280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7c814ed47a23646b94efc318ee8bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dimTime: 10
+  dimTime: 5
   undimTime: 3
   dim: 0
 --- !u!114 &1118995282209086127
@@ -232,12 +232,12 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 4
-  m_PointLightOuterRadius: 15.12
+  m_PointLightInnerRadius: 4.7
+  m_PointLightOuterRadius: 12.54
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

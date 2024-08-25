@@ -131,6 +131,7 @@ public class LeaderBoardManager : MonoBehaviour
             var response = await LeaderboardsService.Instance.AddPlayerScoreAsync(formatLeaderBoardId(level), levelTimeMs);
 
             var playerData = JsonConvert.DeserializeObject<PlayerScore>(JsonConvert.SerializeObject(response));
+            AuthManager.Instance.PlayerUsername = playerData.playerName;
 
             var nameLen = playerData.playerName.Length;
             if (nameLen > NAME_SUFFIX_LENGTH)
