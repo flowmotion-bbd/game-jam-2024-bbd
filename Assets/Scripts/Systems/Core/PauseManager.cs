@@ -46,7 +46,7 @@ public class PauseManager : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
-    void Pause()
+    public void Pause()
     {
         if (GameManager.Instance.IsScenePausible())
         {
