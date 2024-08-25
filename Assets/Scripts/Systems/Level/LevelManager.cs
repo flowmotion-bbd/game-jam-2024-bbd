@@ -84,7 +84,6 @@ public class LevelManager : MonoBehaviour
 
     public void ShowLevelObjects()
     {
-        Debug.Log("Showing Level Objects");
         foreach (GameObject obj in levelObjects)
         {
             obj.SetActive(true);
