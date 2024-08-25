@@ -21,15 +21,6 @@ public class Flame : MonoBehaviour
         firewallMinigameManager = FindAnyObjectByType<FirewallMinigameManager>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        agent.SetDestination(hackerman.position);
-        if (collision.gameObject.layer == LayerMask.NameToLayer("HackerMan"))
-        {
-            FindAnyObjectByType<FirewallMinigameManager>().GameOver(false);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Path path = collision.GetComponent<Path>();
