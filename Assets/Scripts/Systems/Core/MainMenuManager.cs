@@ -15,7 +15,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject howToPlayPanel;
 
     [Header("Username")]
-    [SerializeField] TMP_InputField usernameInputField;
+    //[SerializeField] TMP_InputField usernameInputField;
+    [SerializeField] InputField legacyUsernameInputField;
 
     [Header("Leaderboards")]
     [SerializeField] Transform leaderboardLevelButtonContainer;
@@ -45,7 +46,7 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitUntil(() => { return AuthManager.Instance.IsSignedIn(); });
         if (AuthManager.Instance.PlayerUsername != null)
         {
-            usernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
+            legacyUsernameInputField.text = AuthManager.Instance.PlayerUsername[..(AuthManager.Instance.PlayerUsername.Length - 5)];
         }
     }
 
@@ -198,12 +199,12 @@ public class MainMenuManager : MonoBehaviour
 
     public async void UpdateUsername()
     {
-        if (usernameInputField.text == "" || usernameInputField.text == AuthManager.Instance.PlayerUsername)
+        if (legacyUsernameInputField.text == "" || legacyUsernameInputField.text == AuthManager.Instance.PlayerUsername)
         {
             return;
         }
 
-        Debug.Log("New Username: " + usernameInputField.text);
-        await AuthManager.Instance.UpdatePlayerNameAsync(usernameInputField.text);
+        Debug.Log("New Username: " + legacyUsernameInputField.text);
+        await AuthManager.Instance.UpdatePlayerNameAsync(legacyUsernameInputField.text);
     }
 }
