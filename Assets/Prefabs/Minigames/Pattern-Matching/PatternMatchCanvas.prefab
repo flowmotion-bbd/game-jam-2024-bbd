@@ -630,11 +630,21 @@ PrefabInstance:
       objectReference: {fileID: 2632414534327395411, guid: bbc1e0e27c4dfd847a8bcc709140b3a5, type: 3}
     - target: {fileID: 6158832433066827253, guid: b7448967568a54a4881773d2f779ef2c, type: 3}
       propertyPath: startMinigameDialogue.sentences.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6158832433066827253, guid: b7448967568a54a4881773d2f779ef2c, type: 3}
       propertyPath: 'startMinigameDialogue.sentences.Array.data[0]'
-      value: Pair the correct colours simple!
+      value: You will have 5 seconds to memories the board before the tiles flip
+        over.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158832433066827253, guid: b7448967568a54a4881773d2f779ef2c, type: 3}
+      propertyPath: 'startMinigameDialogue.sentences.Array.data[1]'
+      value: An incorrect colour pair increases your score by 2 and getting a colour
+        pair correct decreases your score by 2.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158832433066827253, guid: b7448967568a54a4881773d2f779ef2c, type: 3}
+      propertyPath: 'startMinigameDialogue.sentences.Array.data[2]'
+      value: You want to get the lowest score possible. Goodluck!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

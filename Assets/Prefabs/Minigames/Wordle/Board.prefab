@@ -83,10 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMinigameDialogue:
     sentences:
-    - It's wordle, but with a hint :)
-  minigameLostDialogue:
-    sentences:
-    - You didn't crack the password, better luck next time!
+    - Crack the password in wordle fashion, by using the hint provided. Goodluck
+  lossScore: 5
   EmptyStyle:
     fillColor: {r: 0.07058824, g: 0.07058824, b: 0.07450981, a: 1}
     outlineColor: {r: 0.22745098, g: 0.22745098, b: 0.23529412, a: 1}
