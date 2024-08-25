@@ -161,7 +161,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadMinigame(string minigameSceneName)
     {
-        gameManager.LoadMinigame(minigameSceneName, false, null);
+        gameManager.LoadMinigame(minigameSceneName, false);
     }
 
     public void LevelSelectButtonHandler()

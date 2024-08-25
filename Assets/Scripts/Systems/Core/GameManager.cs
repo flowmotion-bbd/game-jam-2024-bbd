@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string defaultSceneName = "Main Menu";
 
     private TransitionManager transitionManager;
+    private string currentMinigameSceneName = string.Empty;
 
     public string DefaultSceneName
     {
@@ -40,11 +41,12 @@ public class GameManager : MonoBehaviour
 
         if (levelManager != null)
         {
-            levelManager.MinigameCallback(won, timeChange, dialogue);
+            Debug.Log("LevelManager Found");
+            UnloadMinigame(currentMinigameSceneName, true, () => levelManager.MinigameCallback(won, timeChange, dialogue));
         }
         else
         {
-            SceneManager.LoadScene(defaultSceneName);
+            UnloadMinigame("Main Menu", false, null);
         }
     }
 
@@ -53,14 +55,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(levelSceneName);
     }
 
-    public void LoadMinigame(string minigameSceneName, bool additive, Action transitionCallback)
+    public void LoadMinigame(string minigameSceneName, bool additive)
     {
-        transitionManager.TransitionBetweenMinigames(minigameSceneName, additive, transitionCallback);
+        currentMinigameSceneName = minigameSceneName;
+        transitionManager.TransitionToMinigame(minigameSceneName, additive);
     }
 
-    public void UnloadMinigame(string minigameSceneName)
+    public void UnloadMinigame(string minigameSceneName, bool additive, Action unloadCallback)
     {
-        SceneManager.UnloadSceneAsync(minigameSceneName);
+        transitionManager.TransitionFromMinigame(minigameSceneName, additive, unloadCallback);
     }
 
     public bool IsScenePausible()

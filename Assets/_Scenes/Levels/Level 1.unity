@@ -2421,21 +2421,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2832272052067134524, guid: e847d1c68fb52374fb342873e1919959, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3784588383548478838, guid: e847d1c68fb52374fb342873e1919959, type: 3}
       propertyPath: m_Name
       value: TransitionCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5207188456734548861, guid: e847d1c68fb52374fb342873e1919959, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 810
-      objectReference: {fileID: 0}
-    - target: {fileID: 5207188456734548861, guid: e847d1c68fb52374fb342873e1919959, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
