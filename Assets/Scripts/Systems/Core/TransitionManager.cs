@@ -83,6 +83,10 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator TransitionFromMinigameText()
     {
+        if (ipAddress == "" || ipAddress == null)
+        {
+            ipAddress = RandomIPAddress();
+        }
         tranitionText.text = "Disconnecting from " + ipAddress + " ";
         while (transitioning)
         {

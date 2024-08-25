@@ -90,6 +90,7 @@ MonoBehaviour:
   musicSource: {fileID: 3420798265081940765}
   soundEffects:
   - {fileID: 8300000, guid: 7d72a03b1d842024fb7f631d0da19710, type: 3}
+  - {fileID: 8300000, guid: dd95322926c5d4146af13a0de6d62584, type: 3}
   musicTracks:
   - {fileID: 8300000, guid: b5fd76467c4f59f45bd7496da8144199, type: 3}
   - {fileID: 8300000, guid: ac5491cb44d77914fba54da36d5bac1c, type: 3}

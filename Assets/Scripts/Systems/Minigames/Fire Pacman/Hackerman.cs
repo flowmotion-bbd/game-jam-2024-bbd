@@ -17,6 +17,7 @@ public class Hackerman : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Finish"))
         {
+            AudioManager.Instance.PlaySFX("retro_win");
             firewallMinigameManager.GameOver(true);
         } else if (collision.gameObject.layer == LayerMask.NameToLayer("Fire"))
         {
