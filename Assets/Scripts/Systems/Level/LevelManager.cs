@@ -65,6 +65,7 @@ public class LevelManager : MonoBehaviour
 
     void LevelStartDialogue()
     {
+        Debug.Log("LevelStartDialogue");
         dialogueManager.StartDialogue(levelStartDialogue, StartCountDown);
     }
 
@@ -215,6 +216,7 @@ public class LevelManager : MonoBehaviour
         graphController.ResetState();
         levelUIManager.HideEndLevelScreen();
         StartCountDown();
+        Debug.Log("RestartLevel");
     }
 
     public void LoadMinigame(string minigameSceneName, NodeState nodeState)
@@ -256,6 +258,7 @@ public class LevelManager : MonoBehaviour
         }
 
         dialogueManager.StartDialogue(dialogue, StartCountDown);
+        Debug.Log("MinigameCallback");
     }
 
     public void RemoveEdgeFromGraph(NodeState nodeState)

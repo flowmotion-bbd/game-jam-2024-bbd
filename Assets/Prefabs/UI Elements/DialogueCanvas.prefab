@@ -250,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 8183960098268425262}
   animator: {fileID: 2308441682523495421}
+  dialoguePannel: {fileID: 4255817909479983875}
 --- !u!1 &2589724024276962525
 GameObject:
   m_ObjectHideFlags: 0
