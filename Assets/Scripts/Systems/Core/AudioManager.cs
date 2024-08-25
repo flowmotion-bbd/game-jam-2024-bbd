@@ -29,6 +29,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!musicSource.isPlaying)
+        {
+            PlayRandomMusic();
+        }
+    }
+
     public void PlaySFX(AudioClip clip)
     {
         sfxSource.PlayOneShot(clip);

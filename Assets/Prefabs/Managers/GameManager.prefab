@@ -88,11 +88,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 3571511041457471916}
   musicSource: {fileID: 3420798265081940765}
-  soundEffects: []
+  soundEffects:
+  - {fileID: 8300000, guid: 7d72a03b1d842024fb7f631d0da19710, type: 3}
   musicTracks:
-  - {fileID: 8300000, guid: aa717d85f3835404da2982edba523dc2, type: 3}
-  - {fileID: 8300000, guid: 38b0950f10f4e75408ab4a9aa47e7830, type: 3}
-  - {fileID: 8300000, guid: 6da602d6f18a1264ba3de69a2fcb709e, type: 3}
+  - {fileID: 8300000, guid: b5fd76467c4f59f45bd7496da8144199, type: 3}
+  - {fileID: 8300000, guid: ac5491cb44d77914fba54da36d5bac1c, type: 3}
+  - {fileID: 8300000, guid: f35e8845491b0a54a8d7f9daaf6b3127, type: 3}
 --- !u!82 &3571511041457471916
 AudioSource:
   m_ObjectHideFlags: 0
@@ -106,8 +107,8 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.366
-  m_Pitch: 1
+  m_Volume: 0.246
+  m_Pitch: 1.46
   Loop: 0
   Mute: 0
   Spatialize: 0

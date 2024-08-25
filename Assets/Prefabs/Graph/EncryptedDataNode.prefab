@@ -497,6 +497,7 @@ GameObject:
   - component: {fileID: -899535032626446290}
   - component: {fileID: 2830911301549175760}
   - component: {fileID: 2575187971389982360}
+  - component: {fileID: 229980023784272818}
   m_Layer: 11
   m_Name: EncryptedDataNode
   m_TagString: Untagged
@@ -671,6 +672,28 @@ MonoBehaviour:
   selectKeyText: {fileID: 3857639680940671810}
   selectedSpriteRenderer: {fileID: 2706058407774805779}
   compromiseRadialImage: {fileID: 3097815954051170993}
+--- !u!95 &229980023784272818
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6984337716826931401}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c257b522c9d8a6649bb7d2d18e3a1881, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8397585999772250299
 GameObject:
   m_ObjectHideFlags: 0
