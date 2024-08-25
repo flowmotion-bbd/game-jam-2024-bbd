@@ -14,9 +14,6 @@ public abstract class MinigameManager : MonoBehaviour
 
     [SerializeField] private Dialogue startMinigameDialogue;
 
-    [SerializeField] private Dialogue minigameWonDialogue;
-    [SerializeField] private Dialogue minigameLostDialogue;
-
     [SerializeField] private float lossScore = 5f;
 
     public bool MinigameInProgess
@@ -46,7 +43,7 @@ public abstract class MinigameManager : MonoBehaviour
 
     protected void EndMinigame()
     {
-        gameManager.MinigameEnded(minigameWon, scoreAchieved, minigameWon ? minigameWonDialogue : minigameLostDialogue);
+        gameManager.MinigameEnded(minigameWon, scoreAchieved, null);
     }
 
     public void GameOver(bool hasWon)

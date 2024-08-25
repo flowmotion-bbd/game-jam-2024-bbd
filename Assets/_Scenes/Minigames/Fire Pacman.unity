@@ -11072,11 +11072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMinigameDialogue:
     sentences:
-    - Welcome!
-  minigameWonDialogue:
-    sentences: []
-  minigameLostDialogue:
-    sentences: []
+    - Navigate to the finish, wishout being incinerated. Goodluck!
   lossScore: 5
   flames: []
   hackerman: {fileID: 1197567263}

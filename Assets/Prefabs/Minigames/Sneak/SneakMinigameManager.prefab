@@ -46,9 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMinigameDialogue:
     sentences:
-    - Welcome!
-  minigameWonDialogue:
-    sentences: []
-  minigameLostDialogue:
-    sentences: []
-  time: {fileID: 0}
+    - Collect as many packets as you can in 20 seconds, without being detected by
+      toucing the walls.
+    - The intrusion detection system is configured to make your life as hard as possible.
+      Therefore, your view will dim occasionally for a few seconds. Goodluck!
+  lossScore: 5
+  minigameStatusText: {fileID: 0}
+  spawnPointsParent: {fileID: 0}
+  packetObject: {fileID: 8370416244822399958, guid: 79928e50597ea5e4695363dcf88d24ec, type: 3}
+  globalLight: {fileID: 0}
+  timeLeft: 20
+  numberOfPackets: 8
