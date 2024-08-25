@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MinigameUIManager : MonoBehaviour
 {
+    [SerializeField] GameObject background;
+
     [Header("Win Elements")]
     [SerializeField] GameObject winPanel;
     [SerializeField] TMP_Text winMessageText;
@@ -37,28 +39,33 @@ public class MinigameUIManager : MonoBehaviour
 
     public void SetWinPanelState(bool isActive)
     {
+        background.SetActive(isActive);
         winPanel.SetActive(isActive);
     }
 
     public void SetLosePanelState(bool isActive)
     {
+        background.SetActive(isActive);
         losePanel.SetActive(isActive);
     }
 
     public void ShowWinScreen(string winMessage)
     {
         winMessageText.text = winMessage;
+        background.SetActive(true);
         winPanel.SetActive(true);
     }
 
     public void ShowLoseScreen(string loseMessage)
     {
         lostMessageText.text = loseMessage;
+        background.SetActive(true);
         losePanel.SetActive(true);
     }
 
     public void HideAllPannels()
     {
+        background.SetActive(false);
         losePanel.SetActive(false);
         winPanel.SetActive(false);
     }

@@ -120,8 +120,7 @@ public class PatternMatchBoard : MinigameManager
                 scoreAchieved += scoreBonus;
 
                 correctPairs++;
-                prevClickedTile.enabled = false;
-                currClickedTile.enabled = false;
+                StartCoroutine(RemoveTiles(prevClickedTile, currClickedTile, 0.3f));
             }
             else
             {
@@ -140,6 +139,13 @@ public class PatternMatchBoard : MinigameManager
         {
             Won();
         }
+    }
+
+    IEnumerator RemoveTiles(PatternMatchTile tile1, PatternMatchTile tile2, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        tile1.enabled = false;
+        tile2.enabled = false;
     }
 
     private void GenerateGrid()

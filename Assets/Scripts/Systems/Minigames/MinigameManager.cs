@@ -60,12 +60,12 @@ public abstract class MinigameManager : MonoBehaviour
         minigameWon = hasWon;
         if (hasWon)
         {
-            MinigameUIManager.Instance.ShowWinScreen(scoreAchieved.ToString("F3") + " seconds was added to your current time!");
+            MinigameUIManager.Instance.ShowWinScreen(scoreAchieved.ToString("F3") + " seconds will be added to your current time!");
         }
         else
         {
             scoreAchieved = lossScore;
-            MinigameUIManager.Instance.ShowLoseScreen(scoreAchieved.ToString("F3") + " seconds was added to your current time!");
+            MinigameUIManager.Instance.ShowLoseScreen(scoreAchieved.ToString("F3") + " seconds will be added to your current time!");
         }
 
         StartCoroutine(SetMinigameOver());
