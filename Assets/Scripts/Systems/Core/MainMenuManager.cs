@@ -28,7 +28,6 @@ public class MainMenuManager : MonoBehaviour
     [Header("Levels")]
     [SerializeField] Transform levelButtonContainer;
     [SerializeField] GameObject levelButton;
-    [SerializeField] string levelNamePrefix = "Level ";
 
     const string START_LEVEL_NAME = "Level 1";
 
@@ -39,6 +38,7 @@ public class MainMenuManager : MonoBehaviour
         gameManager = GameManager.Instance;
         GenerateLevelButtons();
         StartCoroutine(UpdateAfterAuth());
+        AudioManager.Instance.PlayRandomMusic();
     }
 
     private IEnumerator UpdateAfterAuth()
@@ -61,7 +61,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    List<string> GetLevelSceneNames()
+    public static List<string> GetLevelSceneNames()
     {
         int sceneCount = SceneManager.sceneCountInBuildSettings;
         List<string> levelSceneNames = new List<string>();
@@ -71,7 +71,7 @@ public class MainMenuManager : MonoBehaviour
             string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
             string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
 
-            if (sceneName.StartsWith(levelNamePrefix))
+            if (sceneName.StartsWith(EndLeveUIManager.levelNamePrefix))
             {
                 levelSceneNames.Add(sceneName);
             }
@@ -87,7 +87,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (buttonText != null)
         {
-            buttonText.text = sceneName.Replace(levelNamePrefix, "");
+            buttonText.text = sceneName.Replace(EndLeveUIManager.levelNamePrefix, "");
         }
 
         Button buttonComponent = buttonInstance.GetComponent<Button>();
@@ -112,7 +112,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (buttonComponent != null)
         {
-            buttonComponent.onClick.AddListener(() => PopulateLeaderboard(int.Parse(sceneName.Replace(levelNamePrefix, ""))));
+            buttonComponent.onClick.AddListener(() => PopulateLeaderboard(int.Parse(sceneName.Replace(EndLeveUIManager.levelNamePrefix, ""))));
         }
     }
 

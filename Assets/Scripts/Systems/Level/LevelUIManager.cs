@@ -40,6 +40,11 @@ public class LevelUIManager : MonoBehaviour
         levelManager.RestartLevel();
     }
 
+    public void NextLevel()
+    {
+        levelManager.LoadNextLevel();
+    }
+
     List<float> SplitTime(float time)
     {
         time = Math.Abs(time);

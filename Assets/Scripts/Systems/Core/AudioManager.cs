@@ -77,4 +77,18 @@ public class AudioManager : MonoBehaviour
         }
         return null;
     }
+    public void PlayRandomMusic()
+    {
+        if (musicTracks.Length == 0)
+        {
+            Debug.LogWarning("No music tracks available!");
+            return;
+        }
+
+        int randomIndex = Random.Range(0, musicTracks.Length);
+
+        musicSource.clip = musicTracks[randomIndex];
+
+        musicSource.Play();
+    }
 }
