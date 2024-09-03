@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3272364397569439431}
   - component: {fileID: 3398457056846866293}
   - component: {fileID: 1571907071212680768}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: BasicNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 3924057901111276222}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: -0.54, z: 0}
+  m_LocalPosition: {x: -9, y: -0.54, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
